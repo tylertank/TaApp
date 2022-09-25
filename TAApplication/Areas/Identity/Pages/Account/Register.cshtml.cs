@@ -143,6 +143,8 @@ namespace TAApplication.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
+                    var dbUser = await _userManager.FindByIdAsync(userId);
+                    await _userManager.AddToRoleAsync(dbUser, "Appliciant");
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
