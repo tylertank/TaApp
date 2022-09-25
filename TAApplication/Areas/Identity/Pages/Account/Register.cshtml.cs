@@ -144,7 +144,7 @@ namespace TAApplication.Areas.Identity.Pages.Account
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var dbUser = await _userManager.FindByIdAsync(userId);
-                    await _userManager.AddToRoleAsync(dbUser, "Appliciant");
+                    await _userManager.AddToRoleAsync(dbUser, "Applicant");
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

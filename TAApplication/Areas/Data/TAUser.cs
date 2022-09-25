@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.Serialization;
 
 namespace TAApplication.Areas.Data
 {
