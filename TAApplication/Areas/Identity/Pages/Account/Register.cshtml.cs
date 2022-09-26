@@ -134,6 +134,8 @@ namespace TAApplication.Areas.Identity.Pages.Account
                 user.FullName = Input.FullName;
                 user.ReferredTo = Input.ReferredTo;
 
+             
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);

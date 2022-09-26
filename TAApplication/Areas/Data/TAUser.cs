@@ -11,6 +11,6 @@ namespace TAApplication.Areas.Data
     {
         public string Unid { get; set; }
         public string FullName { get; set; }
-        public string ReferredTo { get; set; }
+        public string? ReferredTo { get; set; }
     }
 }
