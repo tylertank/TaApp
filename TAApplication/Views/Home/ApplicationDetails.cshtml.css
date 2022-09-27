@@ -1,0 +1,28 @@
+﻿/*
+Author: Cole Hanlon
+Partner: Tyler Harkness
+Date: 9/8/2022
+Course: CS 4540, University of Utah, School of Computing
+Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+
+I, Cole Hanlon & Tyler Harkness, certify that I wrote this code from scratch and did not copy it in part or whole from
+another source. Any references used in the completion of the assignment are cited in my README file.
+
+File Contents
+
+This ApplicationDetails.css file contains all CSS styling for the TA application details page.
+*/
+
+
+.header {
+}
+
+#container {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.manageDivideLine {
+    color: black;
+    height: 5px;
+}

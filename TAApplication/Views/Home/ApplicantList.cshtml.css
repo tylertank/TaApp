@@ -1,0 +1,105 @@
+﻿/*
+Author: Cole Hanlon
+Partner: Tyler Harkness
+Date: 9/8/2022
+Course: CS 4540, University of Utah, School of Computing
+Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+
+I, Cole Hanlon & Tyler Harkness, certify that I wrote this code from scratch and did not copy it in part or whole from
+another source. Any references used in the completion of the assignment are cited in my README file.
+
+File Contents
+
+This ApplicationList.css file contains all CSS styling for the TA application list page.
+*/
+
+﻿tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.styled {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 15%;
+}
+
+    .styled li {
+        padding-left: 1rem;
+        text-indent: -0.75rem;
+    }
+
+        .styled li::before {
+            content: '\1F4CB';
+        }
+
+        .styled li:nth-child(2)::before {
+            content: '\2705';
+        }
+
+.applicantDiv {
+    margin-right: 15%;
+    margin-left: 15%;
+}
+
+.tableFixHead {
+    overflow-y: auto;
+    height: 300px;
+}
+
+    .tableFixHead thead th {
+        position: sticky;
+        top: 0;
+    }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background: #eee;
+}
+
+#applicantSearch {
+    margin-left: 15%;
+    margin-top: 2%;
+    width: 10%;
+}
+
+#applicantLine {
+    height: 5px;
+    background-color: black;
+}
+
+.statusTitle {
+    margin-left: 15%
+}
+
+.statsImage {
+    margin-left: 25%;
+    width: 50%;
+}
+
+.goodEval {
+    color: green;
+}
+
+.mediumEval {
+    color: orange;
+}
+
+.badEval {
+    color: red;
+}
+
+.noAssignment {
+    color: red;
+    font-style: italic;
+}

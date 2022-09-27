@@ -1,0 +1,234 @@
+﻿<!--
+  Author:    Cole Hanlon
+  Partner:   Tyler Harkness
+  Date:      9/8/2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+
+  I, Cole Hanlon & Tyler Harkness, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     This ApplicationList.html file contains all contents for first build of a applicants page of a school of computing TA application
+    website. This file contains purely HTML with links to CSS, there are no links to other scripts. There are references to images
+    in a subdirectory.
+-->
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="author" content="Cole Hanlon, Tyler Harkness">
+    <meta name="description" content="University of Utah School of Computing
+          TA Applicant List with Stats Management for Professor Use">
+    <meta charset="utf-8">
+    <meta name="keywords" content="UofU, University of Utah, School of Computing,
+          TA Program, Applicant List, Professor View, Total Applicants, Placed TAs">
+
+    <title>TA Program Applicants</title>
+
+    <link rel="icon" type="image/x-icon" href="images/ta_favicon.ico">
+
+    <link href="~/TAApplication.styles.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <header></header>
+
+
+
+    <h1 id="applicantsHeader">Applicants</h1>
+    <hr id="applicantLine" />
+
+    <input id="applicantSearch" type="text" placeholder="Search...">
+
+    <!--Dropdown for search by column-->
+    <select id="CategoryFilter">
+        <optgroup label="Column">
+            <option>Notes</option>
+            <option>Prior Evals?</option>
+            <option>Applicant Name</option>
+            <option>Employed In</option>
+            <option>Degree Being Pursued</option>
+            <option>Dept</option>
+            <option>Desired Hours</option>
+            <option>Last Modified</option>
+        </optgroup>
+    </select>
+
+    <button id="FilterButton" type="button">Go!</button>
+
+    <!--Outer div for applicant table-->
+    <div id="appTableDiv" class="tableFixHead applicantDiv">
+        <!--Header table-->
+        <table id="appTable">
+            <thead id="appHead">
+                <tr>
+                    <th>Notes</th>
+                    <th>Prior Evals?</th>
+                    <th>Applicant Name</th>
+                    <th>Employed In</th>
+                    <th>Degree Being Pursued</th>
+                    <th>Dept</th>
+                    <th>UofU GPA</th>
+                    <th>Desired Hours</th>
+                    <th>Last Modified</th>
+                </tr>
+            </thead>
+            <!--Scrollable table-->
+            <tbody id="mainTable">
+                <tr>
+                    <td></td>
+                    <td class="mediumEval">Okay</td>
+                    <td><a href="./ApplicationDetails.html">Frannie Larry</a></td>
+                    <td class="noAssignment">unassigned</td>
+                    <td>Ph.D.</td>
+                    <td>CS</td>
+                    <td>3.7</td>
+                    <td>19</td>
+                    <td>4-Aug-2022</td>
+                </tr>
+                <tr>
+                    <td>
+                        Great student
+                    </td>
+                    <td class="goodEval">Good</td>
+                    <td><a href="./ApplicationDetails.html">Jonathon Vickie</a></td>
+                    <td>CS 2420</td>
+                    <td>BS</td>
+                    <td>CS</td>
+                    <td>4.0</td>
+                    <td>19</td>
+                    <td>4-Aug-2022</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="goodEval">Good</td>
+                    <td><a href="./ApplicationDetails.html">Emory Ewart</a></td>
+                    <td>CS 3810</td>
+                    <td>MS</td>
+                    <td>CS</td>
+                    <td>3.9</td>
+                    <td>10</td>
+                    <td>5-Aug-2022</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="mediumEval">Okay</td>
+                    <td><a href="./ApplicationDetails.html">Andie Lorelei</a></td>
+                    <td>CS 3500</td>
+                    <td>BS</td>
+                    <td>CS</td>
+                    <td>3.2</td>
+                    <td>10</td>
+                    <td>8-Aug-2022</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="badEval">Bad</td>
+                    <td><a href="./ApplicationDetails.html">Selina Mary</a></td>
+                    <td>CS 3810</td>
+                    <td>BS</td>
+                    <td>CS</td>
+                    <td>2.5</td>
+                    <td>10</td>
+                    <td>9-Aug-2022</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="goodEval">Good</td>
+                    <td><a href="./ApplicationDetails.html">Emalee Kinsley</a></td>
+                    <td>CS 3505</td>
+                    <td>BS</td>
+                    <td>CS</td>
+                    <td>4.0</td>
+                    <td>19</td>
+                    <td>9-Aug-2022</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="goodEval">Good</td>
+                    <td><a href="./ApplicationDetails.html">Terry Tegan</a></td>
+                    <td>CS 3505</td>
+                    <td>BS</td>
+                    <td>CS</td>
+                    <td>3.8</td>
+                    <td>10</td>
+                    <td>9-Aug-2022</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="goodEval">Good</td>
+                    <td><a href="./ApplicationDetails.html">Forrest Michaela</a></td>
+                    <td>CS 2100</td>
+                    <td>BS</td>
+                    <td>CS</td>
+                    <td>4.0</td>
+                    <td>19</td>
+                    <td>10-Aug-2022</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="goodEval">Good</td>
+                    <td><a href="./ApplicationDetails.html">Lily Oscar</a></td>
+                    <td>CS 1420</td>
+                    <td>MS</td>
+                    <td>CS</td>
+                    <td>3.9</td>
+                    <td>10</td>
+                    <td>10-Aug-2022</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="goodEval">Good</td>
+                    <td><a href="./ApplicationDetails.html">Nellie Karlee</a></td>
+                    <td>CS 4540</td>
+                    <td>BS</td>
+                    <td>CS</td>
+                    <td>4.0</td>
+                    <td>10</td>
+                    <td>11-Aug-2022</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="goodEval">Good</td>
+                    <td><a href="./ApplicationDetails.html">Lennie Cheyanne</a></td>
+                    <td>CS 1410</td>
+                    <td>MS</td>
+                    <td>CS</td>
+                    <td>4.0</td>
+                    <td>19</td>
+                    <td>11-Aug-2022</td>
+                </tr>
+                <tr>
+                    <td>Past TA</td>
+                    <td class="goodEval">Good</td>
+                    <td><a href="./ApplicationDetails.html">Hayden Truman</a></td>
+                    <td>CS 2420</td>
+                    <td>Ph.D.</td>
+                    <td>CS</td>
+                    <td>4.0</td>
+                    <td>10</td>
+                    <td>11-Aug-2022</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <hX id="applicantStatsTitle" class="statusTitle"><u>Status</u></hX>
+    <ul id="statsList" class="styled">
+        <li>Total Applicants: 3</li>
+        <li>Employed TAs: 2</li>
+    </ul>
+
+    <!--Placeholder for future real graph-->
+    <img id="statsImage" class="statsImage" src="images/pie_chart.jpg" alt="Pie chart">
+
+    <footer id="applicantFooter" class="siteFooter">
+        <p id="applicantDescription" class="footerText">U of U School of Computing</p>
+    </footer>
+</body>
+</html>
