@@ -1,5 +1,75 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using TAApplication.Areas.Data
+@inject UserManager<TAUser> um
+@{
+    int count = 1;
 }
 
+<h1>Role Assignments</h1>
+<script src="~/js/Admin/Roles.js" asp-append-version="true"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
-<button type="button" class="btn btn-primary" onclick="doit(1)"> Click Me </button>
+<table id="roles_table" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>UofU ID</th>
+            <th>Administrator</th>
+            <th>Professor</th>
+            <th>Applicant</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            List<TAUser> users = um.Users.ToList();
+
+            foreach (TAUser user in users)
+            {
+                var userRoll = await um.GetRolesAsync(user);
+                <tr>
+                    <td>@user.FullName</td>
+                    <td>@user.Unid</td>
+                    <td>
+                        @{
+                            if (userRoll.First() == "Administrator")
+                            {
+                                <input type="checkbox" onclick="doit(@count)"  checked data-toggle="toggle" data-size="xs">
+                            }
+                            else
+                            {
+                                <input type="checkbox" data-toggle="toggle" data-size="xs">
+                            }
+                        }
+
+                    </td>
+                    <td>
+                        @{
+                            if (userRoll.First() == "Professor")
+                            {
+                                <input type="checkbox" checked data-toggle="toggle" data-size="xs">
+                            }
+                            else
+                            {
+                                <input type="checkbox" data-toggle="toggle" data-size="xs">
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (userRoll.First() == "Applicant")
+                            {
+                                <input type="checkbox" checked data-toggle="toggle" data-size="xs">
+                            }
+                            else
+                            {
+                                <input type="checkbox" data-toggle="toggle" data-size="xs">
+                            }
+                        }
+
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

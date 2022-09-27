@@ -18,7 +18,7 @@ namespace TAApplication.Controllers
         }
 
         [HttpPost]
-        public string doit(int id)
+        public string doitcs(int id)
         {
             return $"You sent me id: {id}";
         }
