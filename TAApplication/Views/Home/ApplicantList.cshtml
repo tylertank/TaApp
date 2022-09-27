@@ -14,8 +14,24 @@
     website. This file contains purely HTML with links to CSS, there are no links to other scripts. There are references to images
     in a subdirectory.
 -->
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Areas.Data
+@inject UserManager<TAUser> um
 
 <!DOCTYPE html>
+
+@{
+    TAUser currUser = new TAUser();
+    var users = um.Users.ToArray();
+    foreach (var user in users)
+    {
+        if (user.UserName == User.Identity?.Name)
+        {
+            currUser = user;
+        }
+    }
+    var userRoll = await um.GetRolesAsync(currUser);
+}
 
 <html>
 <head>
@@ -82,7 +98,14 @@
                 <tr>
                     <td></td>
                     <td class="mediumEval">Okay</td>
-                    <td><a href="./ApplicationDetails.html">Frannie Larry</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator"){
+                            <td><a href="~/Home/ApplicationDetails">Frannie Larry</a></td>
+                        }
+                        else{
+                            <td><a>Frannie Larry</a></td>
+                        }
+                    }
                     <td class="noAssignment">unassigned</td>
                     <td>Ph.D.</td>
                     <td>CS</td>
@@ -95,7 +118,16 @@
                         Great student
                     </td>
                     <td class="goodEval">Good</td>
-                    <td><a href="./ApplicationDetails.html">Jonathon Vickie</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator")
+                        {
+                            <td><a href="~/Home/ApplicationDetails">Jonathon Vickie</a></td>
+                        }
+                        else
+                        {
+                            <td><a>Jonathon Vickie</a></td>
+                        }
+                    }
                     <td>CS 2420</td>
                     <td>BS</td>
                     <td>CS</td>
@@ -106,7 +138,16 @@
                 <tr>
                     <td></td>
                     <td class="goodEval">Good</td>
-                    <td><a href="./ApplicationDetails.html">Emory Ewart</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator")
+                        {
+                            <td><a href="~/Home/ApplicationDetails">Emory Ewar</a></td>
+                        }
+                        else
+                        {
+                            <td><a>Emory Ewar</a></td>
+                        }
+                    }
                     <td>CS 3810</td>
                     <td>MS</td>
                     <td>CS</td>
@@ -117,7 +158,16 @@
                 <tr>
                     <td></td>
                     <td class="mediumEval">Okay</td>
-                    <td><a href="./ApplicationDetails.html">Andie Lorelei</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator")
+                        {
+                            <td><a href="~/Home/ApplicationDetails">Andie Lorelei</a></td>
+                        }
+                        else
+                        {
+                            <td><a>Andie Lorelei</a></td>
+                        }
+                    }
                     <td>CS 3500</td>
                     <td>BS</td>
                     <td>CS</td>
@@ -128,7 +178,16 @@
                 <tr>
                     <td></td>
                     <td class="badEval">Bad</td>
-                    <td><a href="./ApplicationDetails.html">Selina Mary</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator")
+                        {
+                            <td><a href="~/Home/ApplicationDetails">Selina Mary</a></td>
+                        }
+                        else
+                        {
+                            <td><a>Selina Mary</a></td>
+                        }
+                    }
                     <td>CS 3810</td>
                     <td>BS</td>
                     <td>CS</td>
@@ -139,7 +198,16 @@
                 <tr>
                     <td></td>
                     <td class="goodEval">Good</td>
-                    <td><a href="./ApplicationDetails.html">Emalee Kinsley</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator")
+                        {
+                            <td><a href="~/Home/ApplicationDetails">Emalee Kinsley</a></td>
+                        }
+                        else
+                        {
+                            <td><a>Emalee Kinsley</a></td>
+                        }
+                    }
                     <td>CS 3505</td>
                     <td>BS</td>
                     <td>CS</td>
@@ -150,7 +218,16 @@
                 <tr>
                     <td></td>
                     <td class="goodEval">Good</td>
-                    <td><a href="./ApplicationDetails.html">Terry Tegan</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator")
+                        {
+                            <td><a href="~/Home/ApplicationDetails">Terry Tegan</a></td>
+                        }
+                        else
+                        {
+                            <td><a>Terry Tegan</a></td>
+                        }
+                    }
                     <td>CS 3505</td>
                     <td>BS</td>
                     <td>CS</td>
@@ -161,7 +238,16 @@
                 <tr>
                     <td></td>
                     <td class="goodEval">Good</td>
-                    <td><a href="./ApplicationDetails.html">Forrest Michaela</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator")
+                        {
+                            <td><a href="~/Home/ApplicationDetails">Forrest Michaela</a></td>
+                        }
+                        else
+                        {
+                            <td><a>Forrest Michaela</a></td>
+                        }
+                    }
                     <td>CS 2100</td>
                     <td>BS</td>
                     <td>CS</td>
@@ -172,7 +258,16 @@
                 <tr>
                     <td></td>
                     <td class="goodEval">Good</td>
-                    <td><a href="./ApplicationDetails.html">Lily Oscar</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator")
+                        {
+                            <td><a href="~/Home/ApplicationDetails">Lily Oscar</a></td>
+                        }
+                        else
+                        {
+                            <td><a>Lily Oscar</a></td>
+                        }
+                    }
                     <td>CS 1420</td>
                     <td>MS</td>
                     <td>CS</td>
@@ -183,7 +278,16 @@
                 <tr>
                     <td></td>
                     <td class="goodEval">Good</td>
-                    <td><a href="./ApplicationDetails.html">Nellie Karlee</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator")
+                        {
+                            <td><a href="~/Home/ApplicationDetails">Nellie Karlee</a></td>
+                        }
+                        else
+                        {
+                            <td><a>Nellie Karlee</a></td>
+                        }
+                    }
                     <td>CS 4540</td>
                     <td>BS</td>
                     <td>CS</td>
@@ -194,7 +298,16 @@
                 <tr>
                     <td></td>
                     <td class="goodEval">Good</td>
-                    <td><a href="./ApplicationDetails.html">Lennie Cheyanne</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator")
+                        {
+                            <td><a href="~/Home/ApplicationDetails">Lennie Cheyanne</a></td>
+                        }
+                        else
+                        {
+                            <td><a>Lennie Cheyanne</a></td>
+                        }
+                    }
                     <td>CS 1410</td>
                     <td>MS</td>
                     <td>CS</td>
@@ -205,7 +318,16 @@
                 <tr>
                     <td>Past TA</td>
                     <td class="goodEval">Good</td>
-                    <td><a href="./ApplicationDetails.html">Hayden Truman</a></td>
+                    @{
+                        if (userRoll.First() == "Administrator")
+                        {
+                            <td><a href="~/Home/ApplicationDetails">Hayden Truman</a></td>
+                        }
+                        else
+                        {
+                            <td><a>Hayden Truman</a></td>
+                        }
+                    }
                     <td>CS 2420</td>
                     <td>Ph.D.</td>
                     <td>CS</td>
@@ -225,7 +347,7 @@
     </ul>
 
     <!--Placeholder for future real graph-->
-    <img id="statsImage" class="statsImage" src="images/pie_chart.jpg" alt="Pie chart">
+    <img id="statsImage" class="statsImage" src=".\wwwroot\Images\pie_chart.jpg" alt="Pie chart">
 
     <footer id="applicantFooter" class="siteFooter">
         <p id="applicantDescription" class="footerText">U of U School of Computing</p>
