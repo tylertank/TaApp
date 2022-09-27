@@ -2,12 +2,21 @@
 @using TAApplication.Areas.Data
 @inject SignInManager<TAUser> SignInManager
 @inject UserManager<TAUser> UserManager
-
+@inject RoleManager<IdentityRole> rm
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+        TAUser currUser = new TAUser();
+        var users = UserManager.Users.ToArray();
+       foreach(var user in users){
+           if(user.UserName == User.Identity?.Name){
+                currUser = user;
+           }
+       }
+       var userRoll = await UserManager.GetRolesAsync(currUser);
+      
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @currUser?.Unid! (@userRoll.First())</a>
     </li>
     <li class="nav-item">
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
