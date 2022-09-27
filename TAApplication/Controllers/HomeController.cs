@@ -27,7 +27,7 @@ namespace TAApplication.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Applicant")]
+        [Authorize(Roles = "Applicant, Administrator, Professor")]
         public IActionResult ApplicationCreate()
         {
             return View();
