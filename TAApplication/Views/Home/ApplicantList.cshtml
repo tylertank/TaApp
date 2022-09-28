@@ -50,7 +50,11 @@
     <link rel="icon" type="image/x-icon" href="../../wwwroot/favicon.ico">
 
     <link href="~/TAApplication.styles.css" rel="stylesheet">
-
+    @section Scripts{
+        <script src="~/js/Home/ApplicantList.js" asp-append-version="true"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    }
 </head>
 <body>
 
@@ -61,23 +65,7 @@
     <h1 id="applicantsHeader">Applicants</h1>
     <hr id="applicantLine" />
 
-    <input id="applicantSearch" type="text" placeholder="Search...">
 
-    <!--Dropdown for search by column-->
-    <select id="CategoryFilter">
-        <optgroup label="Column">
-            <option>Notes</option>
-            <option>Prior Evals?</option>
-            <option>Applicant Name</option>
-            <option>Employed In</option>
-            <option>Degree Being Pursued</option>
-            <option>Dept</option>
-            <option>Desired Hours</option>
-            <option>Last Modified</option>
-        </optgroup>
-    </select>
-
-    <button id="FilterButton" type="button">Go!</button>
 
     <!--Outer div for applicant table-->
     <div id="appTableDiv" class="tableFixHead applicantDiv">
