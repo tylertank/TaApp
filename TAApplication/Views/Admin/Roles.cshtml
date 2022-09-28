@@ -6,74 +6,71 @@
 }
 
 <h1>Role Assignments</h1>
+@*Importing the Javascript for the table and changing roles *@
 @section Scripts{
-<script src="~/js/Admin/Roles.js" asp-append-version="true"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="~/js/Admin/Roles.js" asp-append-version="true"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 }
 
+    <table id="roles_table" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>UofU ID</th>
+                <th>Administrator</th>
+                <th>Professor</th>
+                <th>Applicant</th>
+            </tr>
+        </thead>
+        <tbody>
 
- 
-
-<table id="roles_table" class="display" style="width:100%">
-    <thead>
-        <tr>
-            <th>Full Name</th>
-            <th>UofU ID</th>
-            <th>Administrator</th>
-            <th>Professor</th>
-            <th>Applicant</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
+            @{
             List<TAUser> users = um.Users.ToList();
-
             foreach (TAUser user in users)
             {
                 var userRoll = await um.GetRolesAsync(user);
-                                <tr>
-                                    <td>@user.FullName</td>
-                                    <td>@user.Unid</td>
-                                    <td>
-                                        @{
-                            if (userRoll.Contains("Administrator") )
+                <tr>
+                    <td>@user.FullName</td>
+                    <td>@user.Unid</td>
+                    <td>
+                        @{ @* Fills the table based on if the user has the role or not, If the checkbox is clicked it will add or remove the role based on current status*@
+                            if (userRoll.Contains("Administrator"))
                             {
-                                                                <input type="checkbox" onclick="Change_Role('@user.Id', 'Administrator')" checked data-toggle="toggle" data-size="xs">
+                                <input type="checkbox" onclick="Change_Role('@user.Id', 'Administrator')" checked data-toggle="toggle" data-size="xs">
                             }
                             else
                             {
-                                                                <input type="checkbox"  onclick="Change_Role('@user.Id', 'Administrator')" data-toggle="toggle" data-size="xs">
+                                <input type="checkbox" onclick="Change_Role('@user.Id', 'Administrator')" data-toggle="toggle" data-size="xs">
                             }
-                                        }
-
-                                    </td>
-                                    <td>
-                                        @{
+                        }
+                    </td>
+                    <td>
+                        @{
                             if (userRoll.Contains("Professor"))
                             {
-                                                                <input type="checkbox" onclick="Change_Role('@user.Id', 'Professor')" checked data-toggle="toggle" data-size="xs">
+                                <input type="checkbox" onclick="Change_Role('@user.Id', 'Professor')" checked data-toggle="toggle" data-size="xs">
                             }
                             else
                             {
-                                                                <input type="checkbox" onclick="Change_Role('@user.Id', 'Professor')" data-toggle="toggle" data-size="xs">
+                                <input type="checkbox" onclick="Change_Role('@user.Id', 'Professor')" data-toggle="toggle" data-size="xs">
                             }
-                                        }
-                                    </td>
-                                    <td>
-                                        @{
+                        }
+                    </td>
+                    <td>
+                        @{
                             if (userRoll.Contains("Applicant"))
                             {
-                                                                <input type="checkbox" onclick="Change_Role('@user.Id', 'Applicant')" checked data-toggle="toggle" data-size="xs">
+                                <input type="checkbox" onclick="Change_Role('@user.Id', 'Applicant')" checked data-toggle="toggle" data-size="xs">
                             }
                             else
                             {
-                                                                <input type="checkbox" onclick="Change_Role('@user.Id', 'Applicant')" data-toggle="toggle" data-size="xs">
+                                <input type="checkbox" onclick="Change_Role('@user.Id', 'Applicant')" data-toggle="toggle" data-size="xs">
                             }
-                                        }
+                        }
 
-                                    </td>
-                                </tr>
+                    </td>
+                </tr>
             }
         }
     </tbody>

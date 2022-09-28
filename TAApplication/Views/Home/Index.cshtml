@@ -40,19 +40,18 @@
     <link rel="icon" type="image/x-icon" href="../../wwwroot/images/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
-    <link rel="stylesheet" href="Site.css">
-    <style>
-        .jumbotron {
-            background: url("~/wwwroot/Images/ta_help.jpg") center center / cover no-repeat;
-        }
-    </style>
+   @section Styles{
+
+    <link rel="stylesheet" href="/css/site.css">
+   }
+   @*@await RenderSectionAsync("Styles", required:false);*@
 </head>
 <body>
 
     <header></header>
     <main>
         <div id="main-container" class="container py-4">
-            <div class="jumbotron p-5 mb-4 bg-dark rounded-3" style="background: url(/wwwroot/Images/ta_help.jpg) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+            <div class="mainJumbo p-5 mb-4 bg-dark rounded-3">
                 <div class="container-fluid py-5">
                     <h1 class="display-5 fw-bold text-light">Welcome!</h1>
                     <p class="col-md-8 fs-4 text-light">

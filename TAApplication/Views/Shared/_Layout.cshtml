@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="~/TAApplication.styles.css" asp-append-version="true" />
 </head>
 <body>
+    @await RenderSectionAsync("Styles", required:false);
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
