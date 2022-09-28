@@ -19,7 +19,11 @@ Copyright:  CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copie
 
 # Assignment Specific Topics
 
-es for all screen sizes on the right of the application create. We then use this bootstrap column to fill with admin tools on the application details page.
+Observations on Authentication and Authorization
+
+Above and Beyond
+
+Improvements
 
 # Consulted Peers:
 
