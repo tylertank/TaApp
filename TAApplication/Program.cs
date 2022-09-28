@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using TAApplication.Areas.Data;
 using TAApplication.Areas.Identity.Services;
 using TAApplication.Data;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,11 @@ using (var scope = app.Services.CreateScope())
     var um = scope.ServiceProvider.GetRequiredService<UserManager<TAUser>>();
     var rm = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
+
+    var services = scope.ServiceProvider;
+    var context =
+       services.GetRequiredService<ApplicationDbContext>();
+    context.Database.EnsureCreated();
     await DB.InitializeUsers(um, rm);
 }
 
