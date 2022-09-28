@@ -1,4 +1,9 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using TAApplication.Areas.Data
+@inject SignInManager<TAUser> SignInManager
+@inject UserManager<TAUser> UserManager
+@inject RoleManager<IdentityRole> rm
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -55,9 +60,23 @@
                         You also have the opportunity to connect with professors throughout the department, who can assist inyour education and career journey. You can also receive great compensation while working on campus.
                     </p>
 
-                    <button class="btn btn-danger btn-lg" onclick="location.href='./Home/ApplicationCreate';" type="button">Apply Now</button>
-                 
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        TAUser currUser = new TAUser();
+                        var users = UserManager.Users.ToArray();
+                        foreach (var user in users)
+                        {
+                            if (user.UserName == User.Identity?.Name)
+                            {
+                                currUser = user;
+                            }
+                        }
+                        var userRoll = await UserManager.GetRolesAsync(currUser);
 
+                        if (userRoll.Contains("Applicant")) {
+                            <button class="btn btn-danger btn-lg" onclick="location.href='./Home/ApplicationCreate';" type="button">Apply Now</button>
+                        }
+                    }
                 </div>
             </div>
             <div class="row align-items-md-stretch">
