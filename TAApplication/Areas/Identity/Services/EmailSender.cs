@@ -1,4 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
+﻿/**
+ * Author:    Cole Hanlon
+ * Partner:   Tyler Harkness
+ * Date:      9/27/2022
+ * Course:    CS 4540, University of Utah, School of Computing
+ * Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+ *
+ * I, Cole Hanlon & Tyler harkness, certify that I have made modifications to this code based on course
+ * guidance. The base code has been provided through tutorials from Microsoft Corporation. 
+ *
+ * File Contents
+ *
+ *   Defines an email sending object, and executes sending of emails. Provided by Microsoft.
+ */
+
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -6,6 +21,9 @@ using TAApplication.Areas.Identity.Services;
 
 namespace TAApplication.Areas.Identity.Services;
 
+/// <summary>
+/// Defines object to send emails
+/// </summary>
 public class EmailSender : IEmailSender
 {
     private readonly ILogger _logger;
@@ -28,6 +46,14 @@ public class EmailSender : IEmailSender
         await Execute(Options.SendGridKey, subject, message, toEmail);
     }
 
+    /// <summary>
+    /// Generates email message using api key and utah.edu address
+    /// </summary>
+    /// <param name="apiKey"></param>
+    /// <param name="subject"></param>
+    /// <param name="message"></param>
+    /// <param name="toEmail"></param>
+    /// <returns></returns>
     public async Task Execute(string apiKey, string subject, string message, string toEmail)
     {
         var client = new SendGridClient(apiKey);
