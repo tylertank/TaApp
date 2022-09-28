@@ -9,7 +9,7 @@ Commit Tag: Release1
 Project:    TA Application
 Copyright:  CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
 ```
-#AWS Deployments:
+# AWS Deployments:
 
 Cole - https://ec2-54-174-47-168.compute-1.amazonaws.com/
 
