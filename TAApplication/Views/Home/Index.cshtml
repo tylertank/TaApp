@@ -33,25 +33,31 @@
     <title>TA Program Home</title>
 
     <link rel="icon" type="image/x-icon" href="../../wwwroot/images/favicon.ico">
-    <link rel="stylesheet" href="Site.css">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <link rel="stylesheet" href="Site.css">
+    <style>
+        .jumbotron {
+            background: url("~/wwwroot/Images/ta_help.jpg") center center / cover no-repeat;
+        }
+    </style>
 </head>
 <body>
 
     <header></header>
     <main>
         <div id="main-container" class="container py-4">
-            <div class="mainJumbo p-5 mb-4 bg-light rounded-3">
+            <div class="jumbotron p-5 mb-4 bg-dark rounded-3" style="background: url(/wwwroot/Images/ta_help.jpg) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
                 <div class="container-fluid py-5">
-                    <h1 class="display-5 fw-bold text-dark">Welcome!</h1>
+                    <h1 class="display-5 fw-bold text-light">Welcome!</h1>
                     <p class="col-md-8 fs-4 text-light">
                         As a Teaching Assistant in the School of Computing here at the University of Utah, you can strengthen your CS skills in many ways. Being in a teaching role will solidify skills learned in previous enrollments.
                         You also have the opportunity to connect with professors throughout the department, who can assist inyour education and career journey. You can also receive great compensation while working on campus.
                     </p>
 
-                    <button class="btn btn-danger btn-lg" onclick="location.href='./ApplicationCreate.html';" type="button">Apply Now</button>
+                    <button class="btn btn-danger btn-lg" onclick="location.href='./Home/ApplicationCreate';" type="button">Apply Now</button>
+                 
+
                 </div>
             </div>
             <div class="row align-items-md-stretch">
