@@ -1,13 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using TAApplication.Areas.Data
-@inject SignInManager<TAUser> SignInManager
-@inject UserManager<TAUser> UserManager
-@inject RoleManager<IdentityRole> rm
-@{
-    ViewData["Title"] = "Home";
-}
-
-<!--
+﻿<!--
   Author:    Cole Hanlon
   Partner:   Tyler Harkness
   Date:      9/8/2022
@@ -23,6 +14,17 @@
     website. This file contains purely HTML with links to CSS, there are no links to other scripts. There are references to images
     in a subdirectory.
 -->
+
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Areas.Data
+@inject SignInManager<TAUser> SignInManager
+@inject UserManager<TAUser> UserManager
+@inject RoleManager<IdentityRole> rm
+@{
+    ViewData["Title"] = "Home";
+}
+
+
 
 <!DOCTYPE html>
 

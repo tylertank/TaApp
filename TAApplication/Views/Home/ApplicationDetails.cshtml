@@ -13,6 +13,11 @@
      This ApplicationDetails.html file contains all contents for a bootstrap page displaying results of a student's application
     through the TA program web system. This page has been written to work on varying screen sizes.
 -->
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Areas.Data
+@inject SignInManager<TAUser> SignInManager
+@inject UserManager<TAUser> UserManager
+@inject RoleManager<IdentityRole> rm
 @{
     ViewData["Title"] = "Application Details";
 }
@@ -39,112 +44,134 @@
 <body class="d-flex flex-column min-vh-100">
     <header>
     </header>
+    @{
+        @if (SignInManager.IsSignedIn(User))
+        {
+            TAUser currUser = new TAUser();
+            var users = UserManager.Users.ToArray();
+            foreach (var user in users)
+            {
+                if (user.UserName == User.Identity?.Name)
+                {
+                    currUser = user;
+                }
+            }
+            var userRoll = await UserManager.GetRolesAsync(currUser);
 
-    <div id="container">
-        <div class="row">
-            <div class="col-md-6 col-xxl-4 mb-2" id="formHalf">
-                <form class="col-xl-12">
-                    <div class="form-row">
-                        <div class="form-group col-xl-12 mb-2 mt-2">
-                            <label for="Pronouns">Pronouns</label>
-                            <input type="text" class="form-control" id="Pronouns" value="-" disabled>
-                        </div>
-                        <div class="form-group col-xl-12 mb-2">
-                            <label for="Position">Position Being Sought</label>
-                            <input type="text" class="form-control" id="Position" value="Undergrad TA" disabled>
-                        </div>
-                        <div class="form-group col-xl-12 mb-2">
-                            <label for="DegreeP">Degree Being Pursued</label>
-                            <input type="text" class="form-control" id="DegreeP" value="Undergrad B.S." disabled>
-                        </div>
-                        <div class="form-group col-xl-12 mb-2">
-                            <label for="DegreeD">Degree Department</label>
-                            <input type="text" class="form-control" id="DegreeD" value="CS" disabled>
-                        </div>
-                        <div class="form-group col-xl-12 mb-2">
-                            <label for="Semesters">Semesters Completed At Utah</label>
-                            <input type="text" class="form-control" id="Semesters" value="4" disabled>
-                        </div>
-                        <div class="form-group col-xl-12 mb-2">
-                            <label for="Hours">Desired Maximum Hours</label>
-                            <input type="text" class="form-control" id="Hours" value="10" disabled>
-                        </div>
-                        <div class="form-group col-xl-12 mb-2">
-                            <label for="GPA">U of U GPA</label>
-                            <input type="text" class="form-control" id="GPA" value="3.9" disabled>
-                        </div>
-                        <div class="form-group col-xl-12 mb-2">
-                            <label for="pStatement">Personal Statement</label>
-                            <textarea class="form-control" id="pStatement" rows="3" disabled>I have previous teaching experience as a camp counselor.</textarea>
-                        </div>
-                    </div>
-                    <div class="form-group col-xl-12 mb-2">
-                        <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" value="123 Main St" disabled>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-xl-12 mb-2">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity" value="Salt Lake City" disabled>
-                        </div>
-                        <div class="form-group col-xl-12 mb-2">
-                            <label for="inputState">State</label>
-                            <input type="text" class="form-control" id="inputState" value="Utah" disabled>
-                        </div>
-                        <div class="form-group col-xl-2 mb-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" value="84102" disabled>
-                        </div>
+            if (userRoll.Contains("Administrator") || userRoll.Contains("Professor") || currUser.UserName == "u0000000@utah.edu")
+            {
+                <div id="container">
+                    <div class="row">
+                        <div class="col-md-6 col-xxl-4 mb-2" id="formHalf">
+                            <form class="col-xl-12">
+                                <div class="form-row">
+                                    <div class="form-group col-xl-12 mb-2 mt-2">
+                                        <label for="Pronouns">Pronouns</label>
+                                        <input type="text" class="form-control" id="Pronouns" value="-" disabled>
+                                    </div>
+                                    <div class="form-group col-xl-12 mb-2">
+                                        <label for="Position">Position Being Sought</label>
+                                        <input type="text" class="form-control" id="Position" value="Undergrad TA" disabled>
+                                    </div>
+                                    <div class="form-group col-xl-12 mb-2">
+                                        <label for="DegreeP">Degree Being Pursued</label>
+                                        <input type="text" class="form-control" id="DegreeP" value="Undergrad B.S." disabled>
+                                    </div>
+                                    <div class="form-group col-xl-12 mb-2">
+                                        <label for="DegreeD">Degree Department</label>
+                                        <input type="text" class="form-control" id="DegreeD" value="CS" disabled>
+                                    </div>
+                                    <div class="form-group col-xl-12 mb-2">
+                                        <label for="Semesters">Semesters Completed At Utah</label>
+                                        <input type="text" class="form-control" id="Semesters" value="4" disabled>
+                                    </div>
+                                    <div class="form-group col-xl-12 mb-2">
+                                        <label for="Hours">Desired Maximum Hours</label>
+                                        <input type="text" class="form-control" id="Hours" value="10" disabled>
+                                    </div>
+                                    <div class="form-group col-xl-12 mb-2">
+                                        <label for="GPA">U of U GPA</label>
+                                        <input type="text" class="form-control" id="GPA" value="3.9" disabled>
+                                    </div>
+                                    <div class="form-group col-xl-12 mb-2">
+                                        <label for="pStatement">Personal Statement</label>
+                                        <textarea class="form-control" id="pStatement" rows="3" disabled>I have previous teaching experience as a camp counselor.</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-12 mb-2">
+                                    <label for="inputAddress">Address</label>
+                                    <input type="text" class="form-control" id="inputAddress" value="123 Main St" disabled>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-xl-12 mb-2">
+                                        <label for="inputCity">City</label>
+                                        <input type="text" class="form-control" id="inputCity" value="Salt Lake City" disabled>
+                                    </div>
+                                    <div class="form-group col-xl-12 mb-2">
+                                        <label for="inputState">State</label>
+                                        <input type="text" class="form-control" id="inputState" value="Utah" disabled>
+                                    </div>
+                                    <div class="form-group col-xl-2 mb-2">
+                                        <label for="inputZip">Zip</label>
+                                        <input type="text" class="form-control" id="inputZip" value="84102" disabled>
+                                    </div>
 
-                    </div>
-                    <div class="form-group col-xl-12 mb-2">
-                        <label for="inputFluency">Fluency in English</label>
-                        <select id="inputFluency" class="form-control" disabled>
-                            <option selected disabled>Choose...</option>
-                            <option selected="selected">Native English Speaker</option>
-                            <option>Fluent</option>
-                            <option>Not Fluent</option>
-                        </select>
-                    </div>
+                                </div>
+                                <div class="form-group col-xl-12 mb-2">
+                                    <label for="inputFluency">Fluency in English</label>
+                                    <select id="inputFluency" class="form-control" disabled>
+                                        <option selected disabled>Choose...</option>
+                                        <option selected="selected">Native English Speaker</option>
+                                        <option>Fluent</option>
+                                        <option>Not Fluent</option>
+                                    </select>
+                                </div>
 
-                    <div class="form-group mb-2">
-                        <div class="checkbox">
-                            <label for="checkbox1">
-                                <span>Permission to View Academic Records</span>
-                            </label>
-                            <input type="checkbox" id="checkbox1" value="true" class="form-check-input pull-right" checked disabled/>
+                                <div class="form-group mb-2">
+                                    <div class="checkbox">
+                                        <label for="checkbox1">
+                                            <span>Permission to View Academic Records</span>
+                                        </label>
+                                        <input type="checkbox" id="checkbox1" value="true" class="form-check-input pull-right" checked disabled />
+                                    </div>
+                                </div>
+                                <div class="mb-2 col-xl-12 ">
+                                    <label for="formFile" class="form-label">Applicant Resume</label>
+                                    <input class="form-control" type="file" id="formFile" disabled>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6 col-xxl-8 mb-2" id="manageHalf">
+                            <h2>Manage Application</h2>
+                            <h5>Student Jim de St. Germain U0000000</h5>
+                            <hr class="manageDivideLine" />
+                            <img src="~/images/applicant_image.png" />
+                            <hr class="manageDivideLine" />
+
+                            <div class="form-group">
+                                <label for="notes">Application Notes</label>
+                                <textarea class="form-control" id="notes" rows="6">Very strong applicant. Most likely place in 2420.</textarea>
+                            </div>
+                            <hr class="manageDivideLine" />
+                            <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Save this student's application">
+                                Save
+                            </button>
+                            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Approve this student's application">
+                                Approve
+                            </button>
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Delete this student's application">
+                                Delete
+                            </button>
                         </div>
                     </div>
-                    <div class="mb-2 col-xl-12 ">
-                        <label for="formFile" class="form-label">Applicant Resume</label>
-                        <input class="form-control" type="file" id="formFile" disabled>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6 col-xxl-8 mb-2" id="manageHalf">
-                <h2>Manage Application</h2>
-                <h5>Student Jim de St. Germain U0000000</h5>
-                <hr class="manageDivideLine" />
-                <img src="~/images/applicant_image.png" />
-                <hr class="manageDivideLine" />
-
-                <div class="form-group">
-                    <label for="notes">Application Notes</label>
-                    <textarea class="form-control" id="notes" rows="6">Very strong applicant. Most likely place in 2420.</textarea>
                 </div>
-                <hr class="manageDivideLine" />
-                <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Save this student's application">
-                    Save
-                </button>
-                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Approve this student's application">
-                    Approve
-                </button>
-                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Delete this student's application">
-                    Delete
-                </button>
-            </div>
-        </div>
-    </div>
+            }
+            else
+            {
+                <p>You do not have access.</p>
+            }
+        }
+    }
     <footer></footer>
 </body>
 </html>
