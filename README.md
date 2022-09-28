@@ -13,6 +13,8 @@ Copyright:  CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copie
 
 Cole - https://ec2-54-174-47-168.compute-1.amazonaws.com/
 
+Tyler - https://ec2-44-207-126-13.compute-1.amazonaws.com/
+
 # Overview of the TA Application Functionality 
 
 We have now enabled users to be able to register and log in to our site. We have created three roles according, Applicant, Professor, and Administrator. All these different roles have custom navigation bars, with links to what these users would want to see. We also enable authorization based on users being signed in, and their role. We have restricted many pages based on the role you have, when you are logged in. There is still no functionality for actual creation of applications. However, there is a great deal of new functionality added through Authentication and Authorization.
