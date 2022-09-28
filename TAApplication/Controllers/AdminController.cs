@@ -30,17 +30,30 @@ namespace TAApplication.Controllers
         {
             um = userManager; 
         }
-
+        /// <summary>
+        /// the default homepage for admin not in use
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
-        
+        /// <summary>
+        /// returns the roles page for admin, can edit all user permissiosn from this page.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Roles()
         {
             return View();
         }
 
+        /// <summary>
+        /// Takes in the users ID and toggles the role on or off A
+        /// A user can only have one role at a time.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Change_Role(string user_id, string role)
         {

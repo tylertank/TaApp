@@ -29,31 +29,47 @@ namespace TAApplication.Controllers
         {
             _logger = logger;
         }
-
+        /// <summary>
+        /// returns the home page to all users
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
-
+        /// <summary>
+        /// returns the applicantList page for administrators and professors
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Professor")]
         public IActionResult ApplicantList()
         {
             return View();
         }
-
+        /// <summary>
+        /// returns the application create page for anyone that is signed in
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Applicant, Administrator, Professor")]
         public IActionResult ApplicationCreate()
         {
             return View();
         }
 
+        /// <summary>
+        /// returns the application details page for anyone that is signed in
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Professor, Applicant")]
         public IActionResult ApplicationDetails()
         {
             return View();
         }
-
+        /// <summary>
+        /// returns the privacy page for all signed in users
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Privacy()
         {
             return View();
