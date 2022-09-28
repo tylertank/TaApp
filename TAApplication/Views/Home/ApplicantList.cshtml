@@ -17,6 +17,9 @@
 @using Microsoft.AspNetCore.Identity
 @using TAApplication.Areas.Data
 @inject UserManager<TAUser> um
+@{
+    ViewData["Title"] = "Application List";
+}
 
 <!DOCTYPE html>
 
@@ -44,7 +47,7 @@
 
     <title>TA Program Applicants</title>
 
-    <link rel="icon" type="image/x-icon" href="images/ta_favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../../wwwroot/favicon.ico">
 
     <link href="~/TAApplication.styles.css" rel="stylesheet">
 
@@ -99,10 +102,12 @@
                     <td></td>
                     <td class="mediumEval">Okay</td>
                     @{
-                        if (userRoll.First() == "Administrator"){
+                        if (userRoll.Contains("Administrator"))
+                        {
                             <td><a href="~/Home/ApplicationDetails">Frannie Larry</a></td>
                         }
-                        else{
+                        else
+                        {
                             <td><a>Frannie Larry</a></td>
                         }
                     }
@@ -119,7 +124,7 @@
                     </td>
                     <td class="goodEval">Good</td>
                     @{
-                        if (userRoll.First() == "Administrator")
+                        if (userRoll.Contains("Administrator"))
                         {
                             <td><a href="~/Home/ApplicationDetails">Jonathon Vickie</a></td>
                         }
@@ -139,7 +144,7 @@
                     <td></td>
                     <td class="goodEval">Good</td>
                     @{
-                        if (userRoll.First() == "Administrator")
+                        if (userRoll.Contains("Administrator"))
                         {
                             <td><a href="~/Home/ApplicationDetails">Emory Ewar</a></td>
                         }
@@ -159,7 +164,7 @@
                     <td></td>
                     <td class="mediumEval">Okay</td>
                     @{
-                        if (userRoll.First() == "Administrator")
+                        if (userRoll.Contains("Administrator"))
                         {
                             <td><a href="~/Home/ApplicationDetails">Andie Lorelei</a></td>
                         }
@@ -179,7 +184,7 @@
                     <td></td>
                     <td class="badEval">Bad</td>
                     @{
-                        if (userRoll.First() == "Administrator")
+                        if (userRoll.Contains("Administrator"))
                         {
                             <td><a href="~/Home/ApplicationDetails">Selina Mary</a></td>
                         }
@@ -199,7 +204,7 @@
                     <td></td>
                     <td class="goodEval">Good</td>
                     @{
-                        if (userRoll.First() == "Administrator")
+                        if (userRoll.Contains("Administrator"))
                         {
                             <td><a href="~/Home/ApplicationDetails">Emalee Kinsley</a></td>
                         }
@@ -219,7 +224,7 @@
                     <td></td>
                     <td class="goodEval">Good</td>
                     @{
-                        if (userRoll.First() == "Administrator")
+                        if (userRoll.Contains("Administrator"))
                         {
                             <td><a href="~/Home/ApplicationDetails">Terry Tegan</a></td>
                         }
@@ -239,7 +244,7 @@
                     <td></td>
                     <td class="goodEval">Good</td>
                     @{
-                        if (userRoll.First() == "Administrator")
+                        if (userRoll.Contains("Administrator"))
                         {
                             <td><a href="~/Home/ApplicationDetails">Forrest Michaela</a></td>
                         }
@@ -259,7 +264,7 @@
                     <td></td>
                     <td class="goodEval">Good</td>
                     @{
-                        if (userRoll.First() == "Administrator")
+                        if (userRoll.Contains("Administrator"))
                         {
                             <td><a href="~/Home/ApplicationDetails">Lily Oscar</a></td>
                         }
@@ -279,7 +284,7 @@
                     <td></td>
                     <td class="goodEval">Good</td>
                     @{
-                        if (userRoll.First() == "Administrator")
+                        if (userRoll.Contains("Administrator"))
                         {
                             <td><a href="~/Home/ApplicationDetails">Nellie Karlee</a></td>
                         }
@@ -299,7 +304,7 @@
                     <td></td>
                     <td class="goodEval">Good</td>
                     @{
-                        if (userRoll.First() == "Administrator")
+                        if (userRoll.Contains("Administrator"))
                         {
                             <td><a href="~/Home/ApplicationDetails">Lennie Cheyanne</a></td>
                         }
@@ -319,7 +324,7 @@
                     <td>Past TA</td>
                     <td class="goodEval">Good</td>
                     @{
-                        if (userRoll.First() == "Administrator")
+                        if (userRoll.Contains("Administrator"))
                         {
                             <td><a href="~/Home/ApplicationDetails">Hayden Truman</a></td>
                         }
@@ -347,10 +352,6 @@
     </ul>
 
     <!--Placeholder for future real graph-->
-    <img id="statsImage" class="statsImage" src=".\wwwroot\Images\pie_chart.jpg" alt="Pie chart">
-
-    <footer id="applicantFooter" class="siteFooter">
-        <p id="applicantDescription" class="footerText">U of U School of Computing</p>
-    </footer>
+    <img id="statsImage" class="statsImage" src="../../wwwroot/pie_chart.jpg" alt="Pie chart">
 </body>
 </html>
