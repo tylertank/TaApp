@@ -1,4 +1,18 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿/*< !--
+    Author:    Cole Hanlon
+Partner:   Tyler Harkness
+Date: 9 / 27 / 2022
+Course:    CS 4540, University of Utah, School of Computing
+Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+
+    I, Cole Hanlon & Tyler Harkness, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+    this file seeds the database with 5 intial users. 
+-->*/
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
@@ -85,6 +99,11 @@ namespace TAApplication.Data
             await um.AddToRoleAsync(app2, "Applicant");
 
         }
+        /// <summary>
+        /// This method is taken from the Register.cshtml.cs to help create a user in the database.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
     private TAUser CreateUser()
     {
         try
