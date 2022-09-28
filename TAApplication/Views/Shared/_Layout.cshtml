@@ -28,7 +28,7 @@ Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied
     <link rel="stylesheet" href="~/TAApplication.styles.css" asp-append-version="true" />
 </head>
 <body>
-    @await RenderSectionAsync("Styles", required:false);
+   
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -83,9 +83,6 @@ Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied
                     <partial name="_LoginPartial" />
                 </div>
             </div>
-            @if(User.IsInRole("Professor")){
-
-            }
         </nav>
     </header>
     <div class="container">
