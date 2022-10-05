@@ -17,20 +17,30 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using TAApplication.Areas.Data;
+using TAApplication.Models;
 
 namespace TAApplication.Data
 {
     public class ApplicationDbContext : IdentityDbContext<TAUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public IHttpContextAccessor _httpContextAccessor;
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IHttpContextAccessor http)
             : base(options)
         {
+            _httpContextAccessor = http;
+        }
+        public DbSet<Application> Applications { get; set; }
+
+        //Maps the Entity type to a database table.
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Application>().ToTable("Applications");
         }
 
         public async Task InitializeUsers(UserManager<TAUser> um, RoleManager<IdentityRole> rm)
         {
-            
-            if(rm.Roles.Count() != 3)
+
+            if (rm.Roles.Count() != 3)
             {
                 await rm.CreateAsync(new IdentityRole("Administrator"));
                 await rm.CreateAsync(new IdentityRole("Professor"));
@@ -44,42 +54,42 @@ namespace TAApplication.Data
             var app2 = CreateUser();
 
 
-           
+
             admin.Unid = "u1234567";
             admin.EmailConfirmed = true;
             admin.FullName = "uofu admin";
             admin.Email = "admin@utah.edu";
             await um.SetUserNameAsync(admin, admin.Email);
-         
-           
+
+
             await um.CreateAsync(admin, "123ABC!@#def");
 
-        
+
             professor.Unid = "u7654321";
             professor.EmailConfirmed = true;
             professor.FullName = "uofu professor";
             professor.Email = "professor@utah.edu";
             await um.SetUserNameAsync(professor, professor.Email);
-          
+
 
             await um.CreateAsync(professor, "123ABC!@#def");
- 
+
             app0.Unid = "u0000000";
             app0.EmailConfirmed = true;
             app0.FullName = "app 0";
             app0.Email = "u0000000@utah.edu";
             await um.SetUserNameAsync(app0, app0.Email);
-           
+
 
             await um.CreateAsync(app0, "123ABC!@#def");
 
-       
+
             app1.Unid = "u0000001";
             app1.EmailConfirmed = true;
             app1.FullName = "app 1";
             app1.Email = "u0000001@utah.edu";
             await um.SetUserNameAsync(app1, app1.Email);
-          
+
 
             await um.CreateAsync(app1, "123ABC!@#def");
             app2.Unid = "u0000002";
@@ -87,10 +97,10 @@ namespace TAApplication.Data
             app2.FullName = "app 2";
             app2.Email = "u0000002@utah.edu";
             await um.SetUserNameAsync(app2, app2.Email);
-         
+
 
             await um.CreateAsync(app2, "123ABC!@#def");
-          
+
 
             await um.AddToRoleAsync(admin, "Administrator");
             await um.AddToRoleAsync(professor, "Professor");
@@ -104,18 +114,80 @@ namespace TAApplication.Data
         /// </summary>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-    private TAUser CreateUser()
-    {
-        try
+        private TAUser CreateUser()
         {
-            return Activator.CreateInstance<TAUser>();
+            try
+            {
+                return Activator.CreateInstance<TAUser>();
+            }
+            catch
+            {
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(TAUser)}'. " +
+                    $"Ensure that '{nameof(TAUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+            }
         }
-        catch
+        /// <summary>
+        /// This method is taken from the Register.cshtml.cs to help create a user in the database.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public DbSet<TAApplication.Models.Application> Application { get; set; }
+
+
+        /// <summary>
+        /// Every time Save Changes is called, add timestamps
+        /// </summary>
+        /// <returns></returns>
+        public override int SaveChanges()  // JIM: Override save changes to add timestamps
         {
-            throw new InvalidOperationException($"Can't create an instance of '{nameof(TAUser)}'. " +
-                $"Ensure that '{nameof(TAUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-                $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+            AddTimestamps();
+            return base.SaveChanges();
         }
-    }
+        /// <summary>
+        /// Every time Save Changes (Async) is called, add timestamps
+        /// </summary>
+        /// <returns></returns>
+        public override async Task<int> SaveChangesAsync(System.Threading.CancellationToken cancellationToken = default)
+        {
+            AddTimestamps();   // JIM: Override save changes async to add timestamps
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+        /// <summary>
+        /// JIM: this code adds time/user to DB entry
+        /// 
+        /// Check the DB tracker to see what has been modified, and add timestamps/names as appropriate.
+        /// 
+        /// </summary>
+        private void AddTimestamps()
+        {
+            var entities = ChangeTracker.Entries()
+                .Where(x => x.Entity is ModificationTracking
+                        && (x.State == EntityState.Added || x.State == EntityState.Modified));
+
+            var currentUsername = "";
+
+            if (_httpContextAccessor.HttpContext == null) // happens during startup/initialization code
+            {
+                currentUsername = "DBSeeder";
+            }
+            else
+            {
+                currentUsername = _httpContextAccessor.HttpContext.User.Identity?.Name;
+            }
+
+            currentUsername ??= "Sadness"; // JIM: compound assignment magic... test for null, and if so, assign value
+
+            foreach (var entity in entities)
+            {
+                if (entity.State == EntityState.Added)
+                {
+                    ((ModificationTracking)entity.Entity).CreationDate = DateTime.UtcNow;
+                    ((ModificationTracking)entity.Entity).CreatedBy = currentUsername;
+                }
+                ((ModificationTracking)entity.Entity).ModificationDate = DateTime.UtcNow;
+                ((ModificationTracking)entity.Entity).ModifiedBy = currentUsername;
+            }
+        }
     }
 }
