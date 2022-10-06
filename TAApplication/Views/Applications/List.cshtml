@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TAApplication.Models.Application>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Applicant List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Applicant
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pursuing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dept)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GPA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModificationDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.ID">
+                        @item.TAUser.FullName
+                </a> 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pursuing)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dept)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GPA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModificationDate)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
