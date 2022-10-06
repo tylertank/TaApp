@@ -15,11 +15,10 @@ namespace TAApplication.Models
         [ScaffoldColumn(false)]
         public DateTime ModificationDate { get; set; }
 
-        [Required]
+
         [ScaffoldColumn(false)]
         public string? CreatedBy { get; set; }
 
-        [Required]
         [ScaffoldColumn(false)]
         public string? ModifiedBy { get; set; }
 

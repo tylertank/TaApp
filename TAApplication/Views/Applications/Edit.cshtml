@@ -23,6 +23,11 @@
                 <span asp-validation-for="Dept" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="GPA" class="control-label"></label>
+                <input asp-for="GPA" class="form-control" />
+                <span asp-validation-for="GPA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="hours" class="control-label"></label>
                 <input asp-for="hours" class="form-control" />
                 <span asp-validation-for="hours" class="text-danger"></span>
@@ -36,6 +41,11 @@
                 <label asp-for="semestersCompleted" class="control-label"></label>
                 <input asp-for="semestersCompleted" class="form-control" />
                 <span asp-validation-for="semestersCompleted" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="personalStatement" class="control-label"></label>
+                <input asp-for="personalStatement" class="form-control" />
+                <span asp-validation-for="personalStatement" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="transferSchool" class="control-label"></label>
@@ -52,27 +62,7 @@
                 <input asp-for="resumeFileName" class="form-control" />
                 <span asp-validation-for="resumeFileName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Creation" class="control-label"></label>
-                <input asp-for="Creation" class="form-control" />
-                <span asp-validation-for="Creation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="lastModified" class="control-label"></label>
-                <input asp-for="lastModified" class="form-control" />
-                <span asp-validation-for="lastModified" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="GPA" class="control-label"></label>
-                <input asp-for="GPA" class="form-control" />
-                <span asp-validation-for="GPA" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserID" class="control-label"></label>
-                <input asp-for="UserID" class="form-control" />
-                <span asp-validation-for="UserID" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="ID" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

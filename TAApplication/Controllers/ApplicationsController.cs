@@ -16,6 +16,7 @@ namespace TAApplication.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<TAUser> _um;
+
         public ApplicationsController(ApplicationDbContext context, UserManager<TAUser> um)
         {
             _context = context;
@@ -25,19 +26,19 @@ namespace TAApplication.Controllers
         // GET: Applications
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Application.ToListAsync());
+              return View(await _context.Applications.ToListAsync());
         }
 
         // GET: Applications/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Application == null)
+            if (id == null || _context.Applications == null)
             {
                 return NotFound();
             }
 
-            var application = await _context.Application
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var application = await _context.Applications
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (application == null)
             {
                 return NotFound();
@@ -57,9 +58,12 @@ namespace TAApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("pursuing,Dept,hours,avaliableBeforeSchoo,semestersCompleted,transferSchool,linkedInURL,resumeFileName,Creation,lastModified,Id,GPA,UserID")] Application application)
+        public async Task<IActionResult> Create([Bind("pursuing,Dept,GPA,hours,avaliableBeforeSchoo,semestersCompleted,personalStatement,transferSchool,linkedInURL,resumeFileName")] Application application)
         {
             ModelState.Remove("TAUser");
+/*            ModelState.Remove("CreatedDate");
+            ModelState.Remove("ModifiedDate");*/
+
             application.TAUser = await _um.GetUserAsync(User);
             if (ModelState.IsValid)
             {
@@ -73,12 +77,12 @@ namespace TAApplication.Controllers
         // GET: Applications/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Application == null)
+            if (id == null || _context.Applications == null)
             {
                 return NotFound();
             }
 
-            var application = await _context.Application.FindAsync(id);
+            var application = await _context.Applications.FindAsync(id);
             if (application == null)
             {
                 return NotFound();
@@ -91,9 +95,9 @@ namespace TAApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("pursuing,Dept,hours,avaliableBeforeSchoo,semestersCompleted,transferSchool,linkedInURL,resumeFileName,Creation,lastModified,Id,GPA,UserID")] Application application)
+        public async Task<IActionResult> Edit(int id, [Bind("pursuing,Dept,GPA,hours,avaliableBeforeSchoo,semestersCompleted,personalStatement,transferSchool,linkedInURL,resumeFileName,ID")] Application application)
         {
-            if (id != application.Id)
+            if (id != application.ID)
             {
                 return NotFound();
             }
@@ -107,7 +111,7 @@ namespace TAApplication.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ApplicationExists(application.Id))
+                    if (!ApplicationExists(application.ID))
                     {
                         return NotFound();
                     }
@@ -124,13 +128,13 @@ namespace TAApplication.Controllers
         // GET: Applications/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Application == null)
+            if (id == null || _context.Applications == null)
             {
                 return NotFound();
             }
 
-            var application = await _context.Application
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var application = await _context.Applications
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (application == null)
             {
                 return NotFound();
@@ -144,14 +148,14 @@ namespace TAApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Application == null)
+            if (_context.Applications == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Application'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Applications'  is null.");
             }
-            var application = await _context.Application.FindAsync(id);
+            var application = await _context.Applications.FindAsync(id);
             if (application != null)
             {
-                _context.Application.Remove(application);
+                _context.Applications.Remove(application);
             }
             
             await _context.SaveChangesAsync();
@@ -160,7 +164,7 @@ namespace TAApplication.Controllers
 
         private bool ApplicationExists(int id)
         {
-          return _context.Application.Any(e => e.Id == id);
+          return _context.Applications.Any(e => e.ID == id);
         }
     }
 }
