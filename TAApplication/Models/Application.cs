@@ -1,39 +1,45 @@
 ﻿using Microsoft.Build.Framework;
+using System.ComponentModel.DataAnnotations;
 using TAApplication.Areas.Data;
 
 namespace TAApplication.Models
 {
-        public enum Pursuing
-        {
-            BS, MS, PhD
-        }
+    public enum Pursuing
+    {
+        BS, MS, PhD
+    }
+
     public class Application
     {
-        [Required]
         public Pursuing pursuing { get; set; }
-        [Required]
+
         public string? Dept { get; set; }
-        [Required]
+
         public int hours { get; set; }
-        [Required]
+
         public bool avaliableBeforeSchoo { get; set; }
-        [Required]
+
         public int semestersCompleted { get; set; }
-        [Required]
+
         public string? transferSchool { get; set; }
-        [Required]
+
         public string? linkedInURL { get; set; }
-        [Required]
+
         public string? resumeFileName { get; set; }
-        [Required]
+
         public DateTime Creation { get; set; }
-        [Required]
+
         public DateTime lastModified { get; set; }
-        [Required]
+
         public int Id { get; set; }
-        [Required]
+
+        [Microsoft.Build.Framework.Required]
+        [Display(Name = "Grade Point Average",
+            Description = "Please enter a GPA between 0 and 4.0",
+            ShortName = "GPA")]
+        [Range(0,5)]
         public double GPA { get; set; }
-        [Required]
+
         public int UserID { get; set; }
 
         public TAUser TAUser { get; set; } = null!;

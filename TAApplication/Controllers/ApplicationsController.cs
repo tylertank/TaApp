@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using TAApplication.Areas.Data;
 using TAApplication.Data;
 using TAApplication.Models;
 
@@ -13,10 +15,11 @@ namespace TAApplication.Controllers
     public class ApplicationsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public ApplicationsController(ApplicationDbContext context)
+        private readonly UserManager<TAUser> _um;
+        public ApplicationsController(ApplicationDbContext context, UserManager<TAUser> um)
         {
             _context = context;
+            _um = um;
         }
 
         // GET: Applications
@@ -56,6 +59,8 @@ namespace TAApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("pursuing,Dept,hours,avaliableBeforeSchoo,semestersCompleted,transferSchool,linkedInURL,resumeFileName,Creation,lastModified,Id,GPA,UserID")] Application application)
         {
+            ModelState.Remove("TAUser");
+            application.TAUser = await _um.GetUserAsync(User);
             if (ModelState.IsValid)
             {
                 _context.Add(application);

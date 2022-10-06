@@ -29,13 +29,14 @@ namespace TAApplication.Data
         {
             _httpContextAccessor = http;
         }
+
         public DbSet<Application> Applications { get; set; }
 
-        //Maps the Entity type to a database table.
+/*        //Maps the Entity type to a database table.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Application>().ToTable("Applications");
-        }
+        }*/
 
         public async Task InitializeUsers(UserManager<TAUser> um, RoleManager<IdentityRole> rm)
         {
