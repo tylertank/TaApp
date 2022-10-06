@@ -1,0 +1,19 @@
+﻿.styled {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 15%;
+}
+
+    .styled li {
+
+        text-indent: -0.75rem;
+    }
+
+        .styled li::before {
+            content: '\1F4CB';
+        }
+
+        .styled li:nth-child(2)::before {
+            content: '\2705';
+        }

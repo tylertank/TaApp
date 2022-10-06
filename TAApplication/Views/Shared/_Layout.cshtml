@@ -57,25 +57,38 @@ Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied
                             }
                             var userRoll = await UserManager.GetRolesAsync(currUser);
                             if(userRoll.First() == "Applicant"){
-                                <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="ApplicationCreate">Create An Application</a></li>
-                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Home" asp-action="ApplicationDetails">View Your Application</a></li>
+                                
+                                <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Applications" asp-action="Create">Create An Application</a></li>
+                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Applications" asp-action="Details">View Your Application</a></li>
                             }
                             else if (userRoll.First() == "Professor"){
-                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Home" asp-action="ApplicantList">Applicant List</a></li>
+                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Applications" asp-action="List">Applicant List</a></li>
                             }
                             else if (userRoll.First() == "Administrator"){
-                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Home" asp-action="ApplicantList">Applicant List</a></li>
+                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Applications" asp-action="Index">Applicant Home</a></li>
                                 <li class="nav-item"><a class="nav-link text-light" asp-controller="Admin" asp-action="Roles">Roles</a></li>
 
                             }
                         <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-light" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">TA Menu</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown04">
-                                <li><a class="dropdown-item">Cole Hanlon, Tyler Harkness</a></li>
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicantList">Applicant List</a></li>
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicationDetails">Application View u0000000</a></li>
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicationCreate">Application Create u0000000</a></li>
+                            <li><a class="dropdown-item">Cole Hanlon, Tyler Harkness</a></li>
+
+                                <li><hr /></li>
+                                <li>PS5</li>
+                                <li><a class="dropdown-item" asp-controller="Applications" asp-action="Index">Application Index</a></li>
+                                <li><a class="dropdown-item" asp-controller="Applications" asp-action="List">Application List</a></li>
+                                <li><a class="dropdown-item" asp-controller="Applications" asp-action="List">Application Details u0000000</a></li>
+                               
+                                <li><hr /></li>
+                                <li>Admin</li>
                                 <li><a class="dropdown-item" asp-controller="Admin" asp-action="Roles">Roles</a></li>
+
+                                <li><hr /></li>
+                                <li>Old</li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicantList">Applicant List</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicationDetails">Application View</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicationCreate">Application Create</a></li>
                             </ul>
                         </li>
                         }

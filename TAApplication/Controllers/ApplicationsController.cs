@@ -133,9 +133,8 @@ namespace TAApplication.Controllers
                         _context.SaveChanges();
                         return RedirectToAction("Details", new { id = applicationToUpdate.ID });
                     }
-                    catch (DataException /* dex */)
+                    catch (DataException)
                     {
-                        // manage error logging                    } } }
                         return View(applicationToUpdate);
                     }
                 }
