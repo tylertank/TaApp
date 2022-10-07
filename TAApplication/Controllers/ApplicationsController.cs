@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,6 +13,19 @@ using TAApplication.Areas.Data;
 using TAApplication.Data;
 using TAApplication.Models;
 
+//  Author:    Cole Hanlon
+//  Partner:   Tyler Harkness
+//  Date:      10 / 7 / 2022
+//  Course: CS 4540, University of Utah, School of Computing
+//  Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+
+//  I, Cole Hanlon & Tyler Harkness, certify that I wrote this code from scratch and did not copy it in part or whole from
+//  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+//  File Contents
+
+//     This ApplicationsCcontroller.cs file contains permissions and redirects relating to the application portion of the website. 
+// creating, deleting, viewing and editing applications. 
 namespace TAApplication.Controllers
 {
     [Authorize(Roles = "Applicant, Administrator, Professor")]
@@ -26,13 +40,17 @@ namespace TAApplication.Controllers
             _um = um;
         }
 
+
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Index()
         {
             return View();
         }
 
-        // GET: Applications
+        /// <summary>
+        /// gets a list of all the applications.
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Professor")]
         public async Task<IActionResult> List()
         {
@@ -41,8 +59,13 @@ namespace TAApplication.Controllers
                   .ToListAsync());
         }
 
+        /// <summary>
+        /// Displays the application details for the given application ID, 
+        /// if the current user has the correct permissions.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator, Professor, Applicant")]
-        // GET: Applications/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Applications == null)
@@ -65,7 +88,11 @@ namespace TAApplication.Controllers
             return View(application);
         }
 
-        // GET: Applications/Create
+       /// <summary>
+       /// redirects the user's webbrowser to the details page when they have already created an application.
+       /// or displays a blank application.
+       /// </summary>
+       /// <returns></returns>
         public async Task<IActionResult> Create()
         {
             var application = await _context.Applications.Include(o => o.TAUser)
@@ -79,15 +106,11 @@ namespace TAApplication.Controllers
             return View();
         }
 
-
-
-       
-        
-
-
-        // POST: Applications/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// creates an application and saves it to the database.
+        /// </summary>
+        /// <param name="application"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Applicant, Administrator, Professor")]
@@ -95,6 +118,7 @@ namespace TAApplication.Controllers
         {
             ModelState.Remove("TAUser");
             application.TAUser = await _um.GetUserAsync(User);
+      
             if (ModelState.IsValid)
             {
                 _context.Add(application);
@@ -104,8 +128,12 @@ namespace TAApplication.Controllers
             return View(application);
         }
 
-        // GET: Applications/Edit/5
-
+        
+        /// <summary>
+        /// Finds the application in the database and displays it.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Applications == null)
@@ -121,6 +149,11 @@ namespace TAApplication.Controllers
             return View(application);
         }
 
+        /// <summary>
+        /// Retrieves the application from the database and puts the new information into it and saves it to the database.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Administrator,Applicant")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
@@ -157,7 +190,11 @@ namespace TAApplication.Controllers
         }
 
 
-                    // GET: Applications/Delete/5
+         /// <summary>
+         /// finds the application in the database and displays it.
+         /// </summary>
+         /// <param name="id"></param>
+         /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Applications == null)
@@ -175,7 +212,12 @@ namespace TAApplication.Controllers
             return View(application);
         }
 
-        // POST: Applications/Delete/5
+        /// <summary>
+        /// confirms that the database contains an application with the given ID and deletes the application. 
+        /// Returns an error if the application is not found or the database has no applications.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -193,7 +235,11 @@ namespace TAApplication.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        /// <summary>
+        /// checkes if the application is in the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ApplicationExists(int id)
         {
           return _context.Applications.Any(e => e.ID == id);
