@@ -7,12 +7,19 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h2>@Model.TAUser.FullName</h2>
-<h2>@Model.TAUser.Unid</h2>
+@{
+  TAUser currUser = new TAUser();
+        var users = UserManager.Users.ToArray();
+       foreach(var user in users){
+           if(user.UserName == User.Identity?.Name){
+                currUser = user;
+           }
+       } 
+}
  <div id="container">
+     <div class="row">
     <div class="col-sm-6 mb-2" id="formHalf">
-    <dl class="row ">
+    <dl class="row">
             <dt class="col-sm-4 mb-2 mt-2">
             @Html.DisplayNameFor(model => model.pursuing)
         </dt>
@@ -78,8 +85,8 @@
 
 
     <div class="col-md-6 mb-2" id="manageHalf">
-        <h2>Manage Application</h2>
-        <h5>Student Jim de St. Germain U0000000</h5>
+            <h2>Manage @Model.TAUser.FullName's Application</h2>
+            <h5> @Model.TAUser.Unid</h5>
         <hr class="manageDivideLine" />
         <img src="~/images/applicant_image.png" />
         <hr class="manageDivideLine" />
@@ -99,15 +106,16 @@
             Delete
         </button>
     </div>
+    </div>
 </div>
 <div>
     @{
         if(User.IsInRole("Administrator") || User.Identity.Name == Model.TAUser.UserName){
-            <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a>
-            <a asp-action="List">Back to List</a>
+                <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a>
+                <a asp-action="List">Back to List</a>
         }
         else{
-            <a asp-action="List">Back to List</a>
+                <a asp-action="List">Back to List</a>
         }
     }
 </div>
