@@ -66,8 +66,16 @@ namespace TAApplication.Controllers
         }
 
         // GET: Applications/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var application = await _context.Applications.Include(o => o.TAUser)
+                .FirstOrDefaultAsync(m => m.TAUser.UserName == User.Identity.Name);
+
+            if (application != null)
+            {
+               return RedirectToAction("Details", new { id = application.ID });
+            }
+
             return View();
         }
 
@@ -86,7 +94,7 @@ namespace TAApplication.Controllers
             {
                 _context.Add(application);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", new { id = application.ID });
             }
             return View(application);
         }

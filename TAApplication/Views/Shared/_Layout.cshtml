@@ -13,10 +13,13 @@ Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied
      This class contains the base of the navbar, and links to other pages are displayed is based on if you are signed in or not, and what permissions you have.
 -->*@
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
 @using TAApplication.Areas.Data
+@using TAApplication.Data
 @inject SignInManager<TAUser> SignInManager
 @inject UserManager<TAUser> UserManager
 @inject RoleManager<IdentityRole> rm
+@inject ApplicationDbContext _context
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,9 +60,15 @@ Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied
                             }
                             var userRoll = await UserManager.GetRolesAsync(currUser);
                             if(userRoll.First() == "Applicant"){
-                                
-                                <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Applications" asp-action="Create">Create An Application</a></li>
-                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Applications" asp-action="Details">View Your Application</a></li>
+
+                                var application = await _context.Applications.FirstOrDefaultAsync(m => m.TAUser.UserName == currUser.UserName);
+
+                                if(application != null){
+                                    <li class="nav-item"><a class="nav-link text-light" asp-controller="Applications" asp-action="Details" asp-route-id="@application.ID">View Your Application</a></li>
+                                }
+                                else{
+                                    <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Applications" asp-action="Create">Create An Application</a></li>
+                                }
                             }
                             else if (userRoll.First() == "Professor"){
                                 <li class="nav-item"><a class="nav-link text-light" asp-controller="Applications" asp-action="List">Applicant List</a></li>
@@ -78,8 +87,15 @@ Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied
                                 <li>PS5</li>
                                 <li><a class="dropdown-item" asp-controller="Applications" asp-action="Index">Application Index</a></li>
                                 <li><a class="dropdown-item" asp-controller="Applications" asp-action="List">Application List</a></li>
-                                <li><a class="dropdown-item" asp-controller="Applications" asp-action="Details">Application Details u0000000</a></li>
-                               
+                                @{
+                                       
+                                      var  u0_app = await _context.Applications.FirstOrDefaultAsync(m => m.TAUser.UserName == "u0000000@utah.edu");
+
+                                        if (u0_app != null)
+                                        {
+                                            <li><a class="dropdown-item" asp-controller="Applications" asp-action="Details" asp-route-id="@u0_app.ID">Application Details u0000000</a></li>
+                                        }
+                                }
                                 <li><hr /></li>
                                 <li>Admin</li>
                                 <li><a class="dropdown-item" asp-controller="Admin" asp-action="Roles">Roles</a></li>

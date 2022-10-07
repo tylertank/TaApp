@@ -17,9 +17,11 @@
 
 @using Microsoft.AspNetCore.Identity
 @using TAApplication.Areas.Data
+@using TAApplication.Data
 @inject SignInManager<TAUser> SignInManager
 @inject UserManager<TAUser> UserManager
 @inject RoleManager<IdentityRole> rm
+@inject ApplicationDbContext _context
 @{
     ViewData["Title"] = "Home";
 }
