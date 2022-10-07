@@ -189,11 +189,12 @@ namespace TAApplication.Controllers
         }
 
 
-         /// <summary>
-         /// finds the application in the database and displays it.
-         /// </summary>
-         /// <param name="id"></param>
-         /// <returns></returns>
+        /// <summary>
+        /// finds the application in the database and displays it.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "Administrator,Applicant")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Applications == null)

@@ -16,6 +16,7 @@
 -->
 
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
 @using TAApplication.Areas.Data
 @using TAApplication.Data
 @inject SignInManager<TAUser> SignInManager
@@ -71,9 +72,17 @@
                             }
                         }
                         var userRoll = await UserManager.GetRolesAsync(currUser);
+                        var application = await _context.Applications.FirstOrDefaultAsync(m => m.TAUser.UserName == currUser.UserName);
 
-                        if (userRoll.Contains("Applicant")) {
-                            <button class="btn btn-danger btn-lg" onclick="location.href='./Home/ApplicationCreate';" type="button">Apply Now</button>
+                        if (userRoll.Contains("Applicant") && application == null) {
+                            <a class="btn btn-danger btn-lg" asp-controller="Applications" asp-action="Create">Apply Now</a>
+                        }
+                        else if (userRoll.Contains("Applicant") && application != null)
+                        {
+                            <a class="btn btn-primary btn-lg" asp-controller="Applications" asp-action="Details" asp-route-id="@application.ID">View Your Application</a>
+
+
+
                         }
                     }
                 </div>
