@@ -27,7 +27,8 @@ namespace TAApplication.Data.Migrations
                     lastModified = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GPA = table.Column<double>(type: "float", nullable: false),
                     UserID = table.Column<int>(type: "int", nullable: false),
-                    TAUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    TAUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    personalStatement = table.Column<string>(type: "nvarchar(4000)", nullable: true)
                 },
                 constraints: table =>
                 {

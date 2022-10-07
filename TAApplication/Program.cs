@@ -48,8 +48,11 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context =
        services.GetRequiredService<ApplicationDbContext>();
-    context.Database.EnsureCreated();
-    await DB.InitializeUsers(um, rm);
+   if(context.Database.EnsureCreated())
+    {
+        await DB.InitializeUsers(um, rm);
+        await DB.IntializeApplication(um, context);
+    }
 }
 
 // Configure the HTTP request pipeline.

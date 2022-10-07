@@ -62,7 +62,7 @@ namespace TAApplication.Models
             Description = "If desired, add a personal statement.",
             Prompt = "I would be a great TA...",
             ShortName = "Statement")]
-        [StringLength(50000)]
+        [StringLength(8000)]
         public string? personalStatement { get; set; }
 
         [Display(Name = "School Transfered From",

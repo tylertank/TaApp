@@ -16,11 +16,18 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using SendGrid.Helpers.Mail;
 using TAApplication.Areas.Data;
 using TAApplication.Models;
+using static System.Net.Mime.MediaTypeNames;
+using Application = TAApplication.Models.Application;
 
 namespace TAApplication.Data
 {
+    public enum a
+    {
+        BS
+    }
     public class ApplicationDbContext : IdentityDbContext<TAUser>
     {
         public IHttpContextAccessor _httpContextAccessor;
@@ -53,7 +60,6 @@ namespace TAApplication.Data
             var app0 = CreateUser();
             var app1 = CreateUser();
             var app2 = CreateUser();
-
 
 
             admin.Unid = "u1234567";
@@ -110,6 +116,62 @@ namespace TAApplication.Data
             await um.AddToRoleAsync(app2, "Applicant");
 
         }
+
+
+        public async Task IntializeApplication(UserManager<TAUser> um, ApplicationDbContext context)
+        {
+            var u0App = new Application();
+            var u1App = new Application();
+
+
+            u0App.pursuing = 0;
+            u1App.pursuing = 0;
+            u0App.Dept = "CS";
+            u1App.Dept = "DS";
+            u0App.hours = 5;
+            u1App.hours = 15;
+            u0App.GPA = 4.0;
+            u1App.GPA = 3.0;
+            u0App.avaliableBeforeSchoo = true;
+            u1App.avaliableBeforeSchoo = true;
+            u0App.semestersCompleted = 5;
+            u1App.semestersCompleted = 5;
+            u0App.personalStatement = "this is a personal statement hi";
+            u0App.transferSchool = "BYU";
+            u0App.linkedInURL = "https://www.linkedin.com/in/tyler-harkness-51469873/";
+            u0App.resumeFileName = "~/Images/testpdf.pdf";
+    
+
+            var users = um.Users;
+            TAUser u0 = null;
+            TAUser u1 = null;
+            foreach (TAUser u in users)
+            {
+                if (u.Unid == "u0000000")
+                {
+                    u0 = u;
+                }
+                else if (u.Unid == "u0000001")
+                {
+                    u1 = u;
+                }
+            }
+
+         
+            if(u0 != null && u1 != null)
+            {
+            u0App.TAUser = u0;
+            u1App.TAUser = u1;
+            }
+            context.Applications.Add(u0App);
+            context.Applications.Add(u1App);
+
+            await context.SaveChangesAsync();
+
+
+        }
+
+
         /// <summary>
         /// This method is taken from the Register.cshtml.cs to help create a user in the database.
         /// </summary>
