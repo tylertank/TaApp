@@ -39,12 +39,13 @@ namespace TAApplication.Data
 
         public DbSet<Application> Applications { get; set; }
 
-/*        //Maps the Entity type to a database table.
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Application>().ToTable("Applications");
-        }*/
-
+ 
+        /// <summary>
+        /// Intializes all the seeding users in the database. 
+        /// </summary>
+        /// <param name="um"></param>
+        /// <param name="rm"></param>
+        /// <returns></returns>
         public async Task InitializeUsers(UserManager<TAUser> um, RoleManager<IdentityRole> rm)
         {
 
@@ -117,7 +118,12 @@ namespace TAApplication.Data
 
         }
 
-
+        /// <summary>
+        /// Fills the application table of the database with the application seeding data.
+        /// </summary>
+        /// <param name="um"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task IntializeApplication(UserManager<TAUser> um, ApplicationDbContext context)
         {
             var u0App = new Application();
