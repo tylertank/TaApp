@@ -1,15 +1,36 @@
-﻿using EllipticCurve.Utils;
+﻿/**
+ * Author:    Cole Hanlon
+ * Partner:   Tyler Harkness
+ * Date:      10/7/2022
+ * Course:    CS 4540, University of Utah, School of Computing
+ * Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+ *
+ * I, Cole Hanlon & Tyler harkness, certify that I have made modifications to this code based on course
+ * guidance. The base code has been provided through tutorials from Microsoft Corporation. 
+ *
+ * File Contents
+ *
+ *      This file contains all data attributes for applications.
+*/
+
+using EllipticCurve.Utils;
 using Microsoft.Build.Framework;
 using System.ComponentModel.DataAnnotations;
 using TAApplication.Areas.Data;
 
 namespace TAApplication.Models
 {
+    /// <summary>
+    /// Possible degree types
+    /// </summary>
     public enum Pursuing
     {
         BS, MS, PhD
     }
 
+    /// <summary>
+    /// Define all data for applications
+    /// </summary>
     public class Application : ModificationTracking
     {
         [Microsoft.Build.Framework.Required]

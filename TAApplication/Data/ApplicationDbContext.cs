@@ -1,7 +1,7 @@
 ﻿/**
  * Author:    Cole Hanlon
  * Partner:   Tyler Harkness
- * Date:      9/27/2022
+ * Date:      10/7/2022
  * Course:    CS 4540, University of Utah, School of Computing
  * Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
  *
@@ -10,7 +10,7 @@
  *
  * File Contents
  *
- *      This file seeds the database with 5 intial users. 
+ *      This file seeds the database with 5 intial users and 2 applications. 
 */
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -31,6 +31,12 @@ namespace TAApplication.Data
     public class ApplicationDbContext : IdentityDbContext<TAUser>
     {
         public IHttpContextAccessor _httpContextAccessor;
+
+        /// <summary>
+        /// Stores database and http context
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="http"></param>
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IHttpContextAccessor http)
             : base(options)
         {
@@ -39,7 +45,6 @@ namespace TAApplication.Data
 
         public DbSet<Application> Applications { get; set; }
 
- 
         /// <summary>
         /// Intializes all the seeding users in the database. 
         /// </summary>
@@ -71,7 +76,6 @@ namespace TAApplication.Data
 
 
             await um.CreateAsync(admin, "123ABC!@#def");
-
 
             professor.Unid = "u7654321";
             professor.EmailConfirmed = true;

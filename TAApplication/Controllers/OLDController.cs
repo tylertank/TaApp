@@ -1,12 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using TAApplication.Models;
-
-/*Author:    Cole Hanlon
+﻿/**
+ * Author:    Cole Hanlon
  * Partner:   Tyler Harkness
- * Date:     10/7 / 2022
+ * Date:      10/7/2022
  * Course:    CS 4540, University of Utah, School of Computing
  * Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
  *
@@ -15,11 +10,19 @@ using TAApplication.Models;
  *
  * File Contents
  *
- *      This OldController.cs file contains all links to the old home webpages with the correct permissions. 
- *      If you do not have permission to view a specific page you will be greeted with an error page. 
-*/
+ *   This OldController.cs file contains all links to the old home webpages with the correct permissions. 
+ *   If you do not have permission to view a specific page you will be greeted with an error page. 
+ */
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using TAApplication.Models;
+
 namespace TAApplication.Controllers
 {
+    /// <summary>
+    /// Accecissble to logged in users, defines old web pages of the system
+    /// </summary>
     [Authorize]
     public class OLDController : Controller
     {
@@ -29,20 +32,22 @@ namespace TAApplication.Controllers
         {
             _logger = logger;
         }
+
         /// <summary>
         /// returns the applicantList page for administrators and professors
         /// </summary>
         /// <returns></returns>
-       
+        [Authorize(Roles = "Professor, Administrator")]
         public IActionResult ApplicantList()
         {
             return View();
         }
+
         /// <summary>
         /// returns the application create page for anyone that is signed in
         /// </summary>
         /// <returns></returns>
-     
+        [Authorize(Roles = "Applicant, Administrator")]
         public IActionResult ApplicationCreate()
         {
             return View();
@@ -52,7 +57,7 @@ namespace TAApplication.Controllers
         /// returns the application details page for anyone that is signed in
         /// </summary>
         /// <returns></returns>
-      
+        [Authorize(Roles = "Professor, Administrator")]
         public IActionResult ApplicationDetails()
         {
             return View();
