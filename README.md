@@ -11,9 +11,9 @@ Copyright:  CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copie
 ```
 # AWS Deployments:
 
-Cole - https://ec2-54-174-47-168.compute-1.amazonaws.com/
+Cole - PS5 link
 
-Tyler - https://ec2-44-207-126-13.compute-1.amazonaws.com/
+Tyler - PS5 link
 
 # Overview of the TA Application Functionality 
 
