@@ -1,7 +1,7 @@
 ﻿@*/*< !--
     Author:    Cole Hanlon
 Partner:   Tyler Harkness
-Date: 9 / 27 / 2022
+Date: 10 / 7 / 2022
 Course:    CS 4540, University of Utah, School of Computing
 Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
 
@@ -13,10 +13,13 @@ Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied
      This class contains the base of the navbar, and links to other pages are displayed is based on if you are signed in or not, and what permissions you have.
 -->*@
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
 @using TAApplication.Areas.Data
+@using TAApplication.Data
 @inject SignInManager<TAUser> SignInManager
 @inject UserManager<TAUser> UserManager
 @inject RoleManager<IdentityRole> rm
+@inject ApplicationDbContext _context
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,25 +60,51 @@ Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied
                             }
                             var userRoll = await UserManager.GetRolesAsync(currUser);
                             if(userRoll.First() == "Applicant"){
-                                <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="ApplicationCreate">Create An Application</a></li>
-                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Home" asp-action="ApplicationDetails">View Your Application</a></li>
+
+                                var application = await _context.Applications.FirstOrDefaultAsync(m => m.TAUser.UserName == currUser.UserName);
+
+                                if(application != null){
+                                    <li class="nav-item"><a class="nav-link text-light" asp-controller="Applications" asp-action="Details" asp-route-id="@application.ID">View Your Application</a></li>
+                                }
+                                else{
+                                    <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Applications" asp-action="Create">Create An Application</a></li>
+                                }
                             }
                             else if (userRoll.First() == "Professor"){
-                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Home" asp-action="ApplicantList">Applicant List</a></li>
+                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Applications" asp-action="List">Applicant List</a></li>
                             }
                             else if (userRoll.First() == "Administrator"){
-                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Home" asp-action="ApplicantList">Applicant List</a></li>
+                                <li class="nav-item"><a class="nav-link text-light" asp-controller="Applications" asp-action="Index">Applicant Home</a></li>
                                 <li class="nav-item"><a class="nav-link text-light" asp-controller="Admin" asp-action="Roles">Roles</a></li>
 
                             }
                         <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-light" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">TA Menu</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown04">
-                                <li><a class="dropdown-item">Cole Hanlon, Tyler Harkness</a></li>
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicantList">Applicant List</a></li>
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicationDetails">Application View u0000000</a></li>
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicationCreate">Application Create u0000000</a></li>
+                            <li><a class="dropdown-item">Cole Hanlon, Tyler Harkness</a></li>
+
+                                <li><hr /></li>
+                                <li>PS5</li>
+                                <li><a class="dropdown-item" asp-controller="Applications" asp-action="Index">Application Index</a></li>
+                                <li><a class="dropdown-item" asp-controller="Applications" asp-action="List">Application List</a></li>
+                                @{
+                                       
+                                      var  u0_app = await _context.Applications.FirstOrDefaultAsync(m => m.TAUser.UserName == "u0000000@utah.edu");
+
+                                        if (u0_app != null)
+                                        {
+                                            <li><a class="dropdown-item" asp-controller="Applications" asp-action="Details" asp-route-id="@u0_app.ID">Application Details u0000000</a></li>
+                                        }
+                                }
+                                <li><hr /></li>
+                                <li>Admin</li>
                                 <li><a class="dropdown-item" asp-controller="Admin" asp-action="Roles">Roles</a></li>
+
+                                <li><hr /></li>
+                                <li>Old</li>
+                                <li><a class="dropdown-item" asp-controller="OLD" asp-action="ApplicantList">Applicant List</a></li>
+                                <li><a class="dropdown-item" asp-controller="OLD" asp-action="ApplicationDetails">Application View</a></li>
+                                <li><a class="dropdown-item" asp-controller="OLD" asp-action="ApplicationCreate">Application Create</a></li>
                             </ul>
                         </li>
                         }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TAApplication.Data;
 
@@ -11,9 +12,10 @@ using TAApplication.Data;
 namespace TAApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221006000910_ApplicationModel")]
+    partial class ApplicationModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,16 +242,13 @@ namespace TAApplication.Data.Migrations
 
             modelBuilder.Entity("TAApplication.Models.Application", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime>("Creation")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Dept")
@@ -258,14 +257,11 @@ namespace TAApplication.Data.Migrations
                     b.Property<double>("GPA")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("ModificationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("TAUserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
                     b.Property<bool>("avaliableBeforeSchoo")
                         .HasColumnType("bit");
@@ -273,11 +269,10 @@ namespace TAApplication.Data.Migrations
                     b.Property<int>("hours")
                         .HasColumnType("int");
 
-                    b.Property<string>("linkedInURL")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("lastModified")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("personalStatement")
-                        .HasMaxLength(50000)
+                    b.Property<string>("linkedInURL")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("pursuing")
@@ -290,10 +285,9 @@ namespace TAApplication.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("transferSchool")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("TAUserId");
 

@@ -1,0 +1,47 @@
+﻿<!--
+  Author:    Cole Hanlon
+  Partner:   Tyler Harkness
+  Date:      10/7/2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+
+  I, Cole Hanlon & Tyler Harkness, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     This index.cshtml file contains all contents for a allows the administrator to see general stats about the applications, how many applicants average gpa etc...
+-->
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using TAApplication.Areas.Data
+@using TAApplication.Data
+@inject ApplicationDbContext _context
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    double totalGPA = 0;
+    foreach (Application a in _context.Applications){
+        totalGPA += a.GPA;
+    }
+    double avgGPA = totalGPA / _context.Applications.Count();
+}
+
+
+
+
+<h1>Applications Home</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="List">Applications View</a>
+</p>
+
+<hX id="applicantStatsTitle" class="statusTitle"><u>Applicant stats</u></hX>
+
+<ul id="statsList" class="styled">
+    <li>Total Applicants: @_context.Applications.Count()</li>
+    <li>Average GPA: @avgGPA</li>
+    <li>Employed TAs: -</li>
+</ul>
