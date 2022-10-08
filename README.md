@@ -5,7 +5,7 @@ Date:       7-Oct-2022
 Course:     CS 4540, University of Utah, School of Computing
 GitHub ID:  ColeHanlon, tylertank
 Repo:       https://github.com/uofu-cs4540-fall2022/taapplication-webmoguls
-Commit Tag: Release1
+Commit Tag: PS5Completed
 Project:    TA Application
 Copyright:  CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
 ```
