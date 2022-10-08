@@ -1,7 +1,7 @@
 ```
 Author:     Cole Hanlon
 Partner:    Tyler Harkness
-Date:       27-Sep-2022
+Date:       7-Oct-2022
 Course:     CS 4540, University of Utah, School of Computing
 GitHub ID:  ColeHanlon, tylertank
 Repo:       https://github.com/uofu-cs4540-fall2022/taapplication-webmoguls
@@ -17,25 +17,21 @@ Tyler - https://ec2-44-207-126-13.compute-1.amazonaws.com/
 
 # Overview of the TA Application Functionality 
 
-We have now enabled users to be able to register and log in to our site. We have created three roles according, Applicant, Professor, and Administrator. All these different roles have custom navigation bars, with links to what these users would want to see. We also enable authorization based on users being signed in, and their role. We have restricted many pages based on the role you have, when you are logged in. There is still no functionality for actual creation of applications. However, there is a great deal of new functionality added through Authentication and Authorization.
+We have now enabled applicants to create applications and submit them. When an Applicant logs in, they will either see buttons to create an application, or view their application. They can then create an application through the form and submit it. They can also view this application later on. They don't need to know their application id, as we automatically find it for them. The applicant can also edit and delete their application. The professor is able to log in, and view a list of applicants, they can then open the details for applications. They however, are not able to edit or delete applications. The admin is able to log in, and have access to a special application home page. This displays some live data about applications, which we would like to add more to. The admin is also able to view the list of applications, and details on applications. An admin also has the ability to edit and delete applications.
 
 # Comments to Evaluators:
 
-As of submitting this assignment we are not aware of any bugs. We have decided to go with a design choice, where a user can either have 0 roles or 1 role. This means we have modified the Change_Role methods which were provided in lecture. We do not need to take in an add_remove parameter. Since we know we will remove if they have the role, and add if they don't have the role. In a case where they already have a role, we will return an erorr, then catch this error within the JavaScript function. We then force the browser to reload to resolve the error. Which will show the user their change was not put through, and enables the site to continue working. When a user role is removed there is no need to refresh, as no errors occured, and when adding the user's only role there is also no error, and no refresh. This was the most elegant solution to this complex problem in our opinion. 
+As of submitting this assignment we are not aware of any bugs. We have made sure to adjust all buttons and functionality according the assignment specifications. We do not believe we have implemented any different design choices than standard. We currently are not allowing file uploads. Please observe how our home page Apply Now and View your Application buttons dynamically change.
 
 # Assignment Specific Topics
 
-Observations on Authentication and Authorization
+File/Image Uploads
 
-We found Authentication and Authorization through ASP NET to be interesting. There is a ton of built in functionality, which we obviously used throughout. Some things that we found interesting are injection. The ability to pull in the UserManager and RoleManager objects into .cshtml files enables a great deal of customizing a web page. This is very simple to pull the objects in, and then find specific user information for who is currently using the site. This is how we created things like a custom navbar based on your role. Something else that is interesting is how in our AdminController, we added the UserManager object to our constructor, and the UserManager magically is pulled into into the AdminController. We then use this to assign roles, and remove roles based on the Role Management Page. 
+We have not yet implemented file uploading, we only would like to do this with images, as seen in our details page. We did not complete this during this assignment.
 
-Above and Beyond
+ModificationTracking
 
-We have implemented everything we found within the assignment details. We decided to add a little bit more of customization. For example, our home page has a main Jumbotron, this contains an apply now button for those who are signed in and who are applicants. We need to modify this once we have a database for applications. We will link this to the specific page for the user to apply. We think this will be a very nice usability feature. We also modified our Applicant List page to be updated with the jQuery DataTable style. Also, we followed tutorials for error handling in the HTTP Post JavaScript method. This then reloads the webpage, making a smooth error handling process.
-
-Improvements
-
-We would still like to go back and tidy things up from previous assignments, when there is a chance. We did not have time during this assignment.
+The modification tracking code that was provided is very interesting. It is a neat way of being able to add this info to the database for Applications currently. We aren't using any built in SQL time stamps, and simply generating the data from C# and sending it to SQL. ModificationTracking is a class, which defines a CreationDate, ModificationDate, CreatedBy, and ModifiedBy data elements. Each of these are excluded from scaffolding. We can then use this class and inherit from it for any tables/objects we want tracking on. This elements redefining these 4 variables over and over. This means our Application class is inheriting from ModificationTracking. We then have the 4 elements. Upon saving changes within the db context class, we call AddTimestamps(). This method was provided to us, and does the real work. Speaking in terms of an Application, although this applies to any object which inherits. If the application is being added to the context, we define the CreationDate and CreatedBy elements. We access these through the Entity object, and cast it to the parent of ModificationTracking. Then, we must update the ModificationDate and ModifiedBy, in the case it is added or updated. Following this, the context handles adding this data into the actual database. Simply, the db context handles adding the 4 elements to an Application or other object, and then it is added to the database.
 
 # Consulted Peers:
 
@@ -59,14 +55,14 @@ common liscensing when possible.
 
 # References:
     
-    1. Pull in UserManager - https://stackoverflow.com/questions/29292582/accessing-usermanager-outside-accountcontroller#:~:text=You%20can%20get%20that%20instance%20from%20OWIN%20pipeline,code%20that%20makes%20access%20to%20the%20ApplicationUserManager%20possible%3A?adlt=strict&toWww=1&redig=282AFF5DDFE3439DAFC03994EC6524CF
-    2. JavaScript Refresh - https://stackoverflow.com/questions/3715047/how-to-reload-a-page-using-javascript
-    3. Microsoft Email Confirmation - https://learn.microsoft.com/en-us/aspnet/core/security/authentication/accconfirm?view=aspnetcore-6.0&tabs=visual-studio
+    1. Model Binding - https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-6.0
+    2. ASP.NET Actions - https://www.tutorialspoint.com/asp.net_mvc/asp.net_mvc_actions.htm
 
 # Time Expenditures:
 
     1. Assignment One: Predicted Hours: 8 Actual Hours: 10 
     2. Assignment Two: Predicted Hours: 10 Actual Hours: 10 
     4. Assignment Four: Predicted Hours: 8 Actual Hours: 10
+    5. Assignment Five: Predicted Hours: 10 Actual Hours: 10
     
     
