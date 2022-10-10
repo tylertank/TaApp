@@ -11,7 +11,7 @@ Copyright:  CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copie
 ```
 # AWS Deployments:
 
-Cole - PS5 link
+Cole - https://ec2-54-197-29-240.compute-1.amazonaws.com
 
 Tyler - PS5 link
 
