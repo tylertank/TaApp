@@ -122,6 +122,40 @@ namespace TAApplication.Data
 
         }
 
+        public async Task IntializeCourses(UserManager<TAUser> um, ApplicationDbContext context)
+        {
+            var users = um.Users;
+          
+
+            var course1 = new Course();
+            var course2 = new Course();
+            var course3 = new Course();
+            var course4 = new Course();
+            var course5 = new Course();
+
+            course1.semesterOffered = "Spring";
+            course2.semesterOffered = "Fall";
+            course3.semesterOffered = "Fall";
+            course4.semesterOffered = "Summer";
+            course5.semesterOffered = "Spring";
+
+            course1.yearOffered = 2023;
+            course1.title = "Object ORiented programming";
+            course1.department = "cs";
+            course1.courseNumber = 1400;
+            course1.section = 001;
+            course1.description = "an intro to programming";
+            course1.professorUID = "u7654321";
+            course1.professorName = "uofu professor";
+            course1.dayAndTimeOffered = "M/W 3:00-4:20";
+            course1.location = "WEB L104";
+            course1.creditHours = 4;
+            course1.enrollment = 123;
+            course1.Note = "we need 23 ta's";
+            context.Course.Add(course1);
+            await context.SaveChangesAsync();
+        }
+
         /// <summary>
         /// Fills the application table of the database with the application seeding data.
         /// </summary>
