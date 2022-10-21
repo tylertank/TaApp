@@ -48,7 +48,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context =
        services.GetRequiredService<ApplicationDbContext>();
-   if(!context.Database.EnsureCreated())
+   if(context.Database.EnsureCreated())
     {
         await DB.InitializeUsers(um, rm);
         await DB.IntializeApplication(um, context);

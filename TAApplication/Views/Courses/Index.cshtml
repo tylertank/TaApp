@@ -1,7 +1,22 @@
-﻿@model IEnumerable<TAApplication.Models.Course>
-
+﻿@using Microsoft.AspNetCore.Identity
+@using TAApplication.Areas.Data
+@model IEnumerable<TAApplication.Models.Course>
+@inject SignInManager<TAUser> SignInManager
+@inject UserManager<TAUser> UserManager
+@inject RoleManager<IdentityRole> rm
 @{
     ViewData["Title"] = "Index";
+
+    TAUser currUser = new TAUser();
+    var users = UserManager.Users.ToArray();
+    foreach (var user in users)
+    {
+        if (user.UserName == User.Identity?.Name)
+        {
+            currUser = user;
+        }
+    }
+    var userRoll = await UserManager.GetRolesAsync(currUser);
 }
 
 <h1>Index</h1>
@@ -51,9 +66,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.enrollment)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Note)
-            </th>
+            @{
+                if(userRoll.First() == "Administrator"){
+                    <th>
+                        @Html.DisplayNameFor(model => model.Note)
+                    </th>
+                }
+            }
             <th></th>
         </tr>
     </thead>
@@ -99,9 +118,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.enrollment)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Note)
-            </td>
+            @{
+                if (userRoll.First() == "Administrator")
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Note)
+                    </td>
+                }
+            }
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |

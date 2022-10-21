@@ -83,7 +83,7 @@ namespace TAApplication.Models
             Description = "uID of the professor teaching the class",
             Prompt = "u1111111",
             ShortName = "pID")]
-        [RegularExpression("^u[0 - 9]{7}")]
+        [RegularExpression("^u[0-9]{7}")]
         public string? professorUID { get; set; }
 
         [Microsoft.Build.Framework.Required]

@@ -1,7 +1,12 @@
 ﻿@model TAApplication.Models.Course
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Areas.Data
+@inject UserManager<TAUser> UserManager
+@inject RoleManager<IdentityRole> rm
 
 @{
     ViewData["Title"] = "Create";
+    var allProfessors = await UserManager.GetUsersInRoleAsync("Professor");
 }
 
 <h1>Create</h1>
@@ -48,14 +53,14 @@
                 <span asp-validation-for="description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="professorUID" class="control-label"></label>
-                <input asp-for="professorUID" class="form-control" />
-                <span asp-validation-for="professorUID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="professorName" class="control-label"></label>
-                <input asp-for="professorName" class="form-control" />
-                <span asp-validation-for="professorName" class="text-danger"></span>
+                <select asp-for="professorName" class="form-control" style="width:450px">
+                @{
+                    foreach(TAUser prof in allProfessors){
+                        <option value="@prof.FullName UNID: @prof.Unid">@prof.FullName, @prof.Unid</option>
+                    }
+                }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="dayAndTimeOffered" class="control-label"></label>
