@@ -19,7 +19,7 @@
     var userRoll = await UserManager.GetRolesAsync(currUser);
 }
 
-<h1>Index</h1>
+<h1>All Courses</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -128,8 +128,8 @@
             }
 
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Update" asp-route-id="@item.ID">Update</a> |
+                <a asp-action="View" asp-route-id="@item.ID">View</a> |
                 <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>

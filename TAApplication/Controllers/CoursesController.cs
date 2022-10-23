@@ -24,13 +24,13 @@ namespace TAApplication.Controllers
         }
 
         // GET: Courses
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> List()
         {
             return View(await _context.Course.ToListAsync());
         }
 
         // GET: Courses/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> View(int? id)
         {
             if (id == null || _context.Course == null)
             {
@@ -76,7 +76,7 @@ namespace TAApplication.Controllers
 
         // GET: Courses/Edit/5
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Update(int? id)
         {
             if (id == null || _context.Course == null)
             {
@@ -97,7 +97,7 @@ namespace TAApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,semesterOffered,yearOffered,title,department,courseNumber,section,description,professorUID,professorName,dayAndTimeOffered,location,creditHours,enrollment,Note")] Course course)
+        public async Task<IActionResult> Update(int id, [Bind("ID,semesterOffered,yearOffered,title,department,courseNumber,section,description,professorUID,professorName,dayAndTimeOffered,location,creditHours,enrollment,Note")] Course course)
         {
             if (id != course.ID)
             {
