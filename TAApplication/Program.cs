@@ -38,11 +38,9 @@ builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 builder.Services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    IConfigurationSection googleAuthNSection =
-                     builder.Configuration.GetSection("Authentication:Google");
-
-                    options.ClientId = googleAuthNSection["ClientId"];
-                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                 
+                    options.ClientId = builder.Configuration.GetValue<string>("Google:ClientID");
+                    options.ClientSecret = builder.Configuration.GetValue<string>("Google:Secret");
                 });
 
 var app = builder.Build();
