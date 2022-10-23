@@ -97,8 +97,11 @@ namespace TAApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Update(int id, [Bind("ID,semesterOffered,yearOffered,title,department,courseNumber,section,description,professorUID,professorName,dayAndTimeOffered,location,creditHours,enrollment,Note")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,semesterOffered,yearOffered,title,department,courseNumber,section,description,professorUID,professorName,dayAndTimeOffered,location,creditHours,enrollment,Note")] Course course)
         {
+            string[] prof = course.professorName.Split(" UNID: ");
+            course.professorName = prof[0];
+            course.professorUID = prof[1];
             if (id != course.ID)
             {
                 return NotFound();
@@ -122,7 +125,7 @@ namespace TAApplication.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(course);
         }

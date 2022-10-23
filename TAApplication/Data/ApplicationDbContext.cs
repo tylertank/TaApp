@@ -134,25 +134,88 @@ namespace TAApplication.Data
             var course5 = new Course();
 
             course1.semesterOffered = "Spring";
-            course2.semesterOffered = "Fall";
-            course3.semesterOffered = "Fall";
-            course4.semesterOffered = "Summer";
+            course2.semesterOffered = "Spring";
+            course3.semesterOffered = "Spring";
+            course4.semesterOffered = "Spring";
             course5.semesterOffered = "Spring";
 
             course1.yearOffered = 2023;
-            course1.title = "Object ORiented programming";
-            course1.department = "cs";
+            course2.yearOffered = 2023;
+            course3.yearOffered = 2023;
+            course4.yearOffered = 2023;
+            course5.yearOffered = 2023;
+
+            course1.title = "Intro Comp Programming";
+            course1.department = "CS";
             course1.courseNumber = 1400;
             course1.section = 001;
-            course1.description = "an intro to programming";
+            course1.description = "An intro to programming";
             course1.professorUID = "u7654321";
             course1.professorName = "uofu professor";
-            course1.dayAndTimeOffered = "M/W 3:00-4:20";
-            course1.location = "WEB L104";
+            course1.dayAndTimeOffered = "MoWe/01:25PM-02:45PM";
+            course1.location = "S BEH AUD";
             course1.creditHours = 4;
-            course1.enrollment = 123;
-            course1.Note = "we need 23 ta's";
+            course1.enrollment = 160;
+            course1.Note = "We need 5 TAs";
+
+            course2.title = "Discrete Structures";
+            course2.department = "CS";
+            course2.courseNumber = 2100;
+            course2.section = 001;
+            course2.description = "Learn about discrete mathematics";
+            course2.professorUID = "u7654321";
+            course2.professorName = "uofu professor";
+            course2.dayAndTimeOffered = "MoWe/08:05AM-09:25AM";
+            course2.location = "WEB L104";
+            course2.creditHours = 3;
+            course2.enrollment = 120;
+            course2.Note = "";
+
+            course3.title = "Intro Alg & Data Structures";
+            course3.department = "CS";
+            course3.courseNumber = 2420;
+            course3.section = 001;
+            course3.description = "Learn about intro algorithms and data structures";
+            course3.professorUID = "u7654321";
+            course3.professorName = "uofu professor";
+            course3.dayAndTimeOffered = "TuTh/12:25PM-01:45PM";
+            course3.location = "S BEH AUD";
+            course3.creditHours = 4;
+            course3.enrollment = 160;
+            course3.Note = "";
+
+            course4.title = "Models of Computation";
+            course4.department = "CS";
+            course4.courseNumber = 3100;
+            course4.section = 001;
+            course4.description = "Learn about models of computation";
+            course4.professorUID = "u7654321";
+            course4.professorName = "uofu professor";
+            course4.dayAndTimeOffered = "MoWe/01:25PM-02:45PM";
+            course4.location = "GC 2950";
+            course4.creditHours = 3;
+            course4.enrollment = 140;
+            course4.Note = "";
+
+            course5.title = "Computer Systems";
+            course5.department = "CS";
+            course5.courseNumber = 4400;
+            course5.section = 001;
+            course5.description = "Learn about computer systems";
+            course5.professorUID = "u7654321";
+            course5.professorName = "uofu professor";
+            course5.dayAndTimeOffered = "MoWe/11:50AM-01:10PM";
+            course5.location = "HEB 2004";
+            course5.creditHours = 3;
+            course5.enrollment = 150;
+            course5.Note = "Course needs 4 more TAs";
+
             context.Course.Add(course1);
+            context.Course.Add(course2);
+            context.Course.Add(course3);
+            context.Course.Add(course4);
+            context.Course.Add(course5);
+
             await context.SaveChangesAsync();
         }
 
