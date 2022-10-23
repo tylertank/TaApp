@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using TAApplication.Areas.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace TAApplication.Areas.Identity.Pages.Account
 {
@@ -85,6 +86,10 @@ namespace TAApplication.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+            [Required]
+            [RegularExpression("^u[0-9]{7}")]
+            public string Unid { get; set; }
+            public string Name { get; set; }
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -153,10 +158,12 @@ namespace TAApplication.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                user.Unid = Input.Unid;
+                user.FullName = info.Principal.FindFirstValue(ClaimTypes.Name);
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-
+                
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -167,6 +174,7 @@ namespace TAApplication.Areas.Identity.Pages.Account
 
                         var userId = await _userManager.GetUserIdAsync(user);
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        await _userManager.AddToRoleAsync(user, "Applicant");
                         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                         var callbackUrl = Url.Page(
                             "/Account/ConfirmEmail",

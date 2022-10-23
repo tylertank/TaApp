@@ -35,6 +35,15 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
+builder.Services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                     builder.Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                });
 
 var app = builder.Build();
 //gets the usermanager, DB context, and role manager.
@@ -55,6 +64,9 @@ using (var scope = app.Services.CreateScope())
         await DB.IntializeCourses(um, context);
     }
 }
+
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
