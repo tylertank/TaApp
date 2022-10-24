@@ -1,4 +1,19 @@
-﻿using System;
+﻿/**
+ * Author:    Cole Hanlon
+ * Partner:   Tyler Harkness
+ * Date:      10/24/2022
+ * Course:    CS 4540, University of Utah, School of Computing
+ * Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+ *
+ * I, Cole Hanlon & Tyler harkness, certify that I have made modifications to this code based on course
+ * guidance. The base code has been provided through tutorials from Microsoft Corporation. 
+ *
+ * File Contents
+ *
+ *   This CoursesController.cs file contains permissions and redirects relating to the courses portion of the website. 
+ *   creating, deleting, viewing and editing courses. 
+ */
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
