@@ -41,7 +41,8 @@ public class EmailSender : IEmailSender
 
     public async Task SendEmailAsync(string toEmail, string subject, string message)
     {
-        if (string.IsNullOrEmpty(Options.SendGridKey))
+        string sendGrid = _config.GetValue<string>("SendGrid:Key");
+        if (sendGrid == null)
         {
             throw new Exception("Null SendGridKey");
         }
