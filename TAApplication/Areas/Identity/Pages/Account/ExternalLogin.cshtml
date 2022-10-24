@@ -1,5 +1,8 @@
 ﻿@page
-
+@model ExternalLoginModel
+@{
+    ViewData["Title"] = "Register";
+}
 <!--
   Author:    Cole Hanlon
   Partner:   Tyler Harkness
@@ -12,15 +15,9 @@
 
   File Contents
 
-     This ExternalLogin.cshtml file contains all contents for a webpage to complete the model of a TAUser after using Google 
+     This ExternalLogin.cshtml file contains all contents for a webpage to complete the model of a TAUser after using Google
      authentication.
 -->
-
-
-@model ExternalLoginModel
-@{
-    ViewData["Title"] = "Register";
-}
 
 <h1>@ViewData["Title"]</h1>
 <h2 id="external-login-title">Associate your @Model.ProviderDisplayName account.</h2>

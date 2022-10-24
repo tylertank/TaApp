@@ -13,7 +13,7 @@ Copyright:  CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copie
 
 Cole - https://ec2-3-234-13-43.compute-1.amazonaws.com/
 
-Tyler - https://ec2-52-204-59-4.compute-1.amazonaws.com/
+Tyler - https://3.94.140.199.nip.io/
 
 # Overview of the TA Application Functionality 
 

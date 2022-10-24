@@ -1,5 +1,9 @@
 ﻿@page
+@model LoginModel
 
+@{
+    ViewData["Title"] = "Log in";
+}
 <!--
   Author:    Cole Hanlon
   Partner:   Tyler Harkness
@@ -15,13 +19,6 @@
      This Login.cshtml file contains all contents for a webpage to allow users to login to the systen, and now includes google
      sign in as an option.
 -->
-
-
-@model LoginModel
-
-@{
-    ViewData["Title"] = "Log in";
-}
 
 <h1>@ViewData["Title"]</h1>
 <div class="row">
