@@ -17,11 +17,11 @@ Tyler - https://ec2-52-204-59-4.compute-1.amazonaws.com/
 
 # Overview of the TA Application Functionality 
 
-We have now added the functionality to sign in and register with a google account. And also started the process of implementing courses into our project. Admins can now create, view, edit and delete courses.
+We have now added the functionality to sign in and register with a google account. And also started the process of implementing courses into our project. Admins can now create, view, edit and delete courses. Professors are also able to view a list of course info, without viewing notes.
 
 # Comments to Evaluators:
 
-As of submitting this assignment we are not aware of any bugs. We have made sure to adjust all buttons and functionality according the assignment specifications. We do not believe we have implemented any different design choices than standard. We currently are not allowing file uploads. Please observe how our home page Apply Now and View your Application buttons dynamically change.
+As of submitting this assignment we are not aware of any bugs. We have made sure to adjust all buttons and functionality according the assignment specifications. We do not believe we have implemented any different design choices than standard.
 
 # Assignment Specific Topics
 
@@ -49,8 +49,7 @@ common liscensing when possible.
 
 # References:
     
-    1. Model Binding - https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-6.0
-    2. ASP.NET Actions - https://www.tutorialspoint.com/asp.net_mvc/asp.net_mvc_actions.htm
+    1. Google external login - https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-5.0
 
 # Time Expenditures:
 
@@ -58,7 +57,7 @@ common liscensing when possible.
     2. Assignment Two: Predicted Hours: 10 Actual Hours: 10 
     4. Assignment Four: Predicted Hours: 8 Actual Hours: 10
     5. Assignment Five: Predicted Hours: 10 Actual Hours: 10
-    5. Assignment Six: Predicted Hours: 6 Actual Hours: 5
+    6. Assignment Six: Predicted Hours: 6 Actual Hours: 5
 
     
     
