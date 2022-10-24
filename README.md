@@ -17,7 +17,7 @@ Tyler - https://ec2-52-204-59-4.compute-1.amazonaws.com/
 
 # Overview of the TA Application Functionality 
 
-We have now added the functionality to sign in and register with a google account. And also started the process of implementing courses into our project. Admins can now create, view, edit and delete courses. Professors are also able to view a list of course info, without viewing notes.
+We have now added the functionality to sign in and register with a google account. And also started the process of implementing courses into our project. Admins can now create, view, edit and delete courses. Professors are also able to view a list of course info, without viewing notes. To make creating a course as easy as possible for an administrator, We decided instead of having the administrator having to know the professors Name and UnID before creating the course. We created a drop down menu for the professor's UnID that displays the professor's full name and UnID. This enables the Admin to quickly and easily select which professor is teaching the course.
 
 # Comments to Evaluators:
 
@@ -25,7 +25,7 @@ As of submitting this assignment we are not aware of any bugs. We have made sure
 
 # Assignment Specific Topics
 
-To make creating a course as easy as possible for an administrator, We decided instead of having the administrator having to know the professors Name and UnID before creating the course. We created a drop down menu for the professor's UnID that displays the professor's full name and UnID. This enables the Admin to quickly and easily select which professor is teaching the course.
+None listed in assignment details.
 
 # Consulted Peers:
 
