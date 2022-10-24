@@ -1,13 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography.X509Certificates;
-using System.Xml.Linq;
-
-namespace TAApplication.Models
-{
-    /**
+﻿/**
  * Author:    Cole Hanlon
  * Partner:   Tyler Harkness
- * Date:      10/7/2022
+ * Date:      10/24/2022
  * Course:    CS 4540, University of Utah, School of Computing
  * Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
  *
@@ -16,10 +10,14 @@ namespace TAApplication.Models
  *
  * File Contents
  *
- *      This file contains all data attributes for applications.
+ *      This file contains all data attributes for courses.
 */
+namespace TAApplication.Models {
 
-   
+    using System.ComponentModel.DataAnnotations;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Xml.Linq;
+
     public class Course : ModificationTracking
     {
         
@@ -131,3 +129,4 @@ namespace TAApplication.Models
 
     }
 }
+
