@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using TAApplication.Areas.Data;
 using TAApplication.Data;
 using TAApplication.Models;
 
@@ -181,12 +182,33 @@ namespace TAApplication.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool CourseExists(int id)
         {
             return _context.Course.Any(e => e.ID == id);
+        }
+
+        /// <summary>
+        /// Used to update note through ajax
+        /// </summary>
+        /// <param name="course_id"></param>
+        /// <param name="new_note"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Change_Note(string course_id, string new_note)
+        {
+            int courseInt = int.Parse(course_id);
+            var course = await _context.Course.FindAsync(courseInt);
+
+            if (course!= null)
+            {
+                course.Note = new_note;
+                await _context.SaveChangesAsync();
+                return Ok(new { success = true, message = "updated note!" });
+            }
+            return BadRequest(new { success = false, message = "course not found!" });
         }
     }
 }

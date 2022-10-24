@@ -19,7 +19,7 @@
 @inject UserManager<TAUser> UserManager
 @inject RoleManager<IdentityRole> rm
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "List";
 
     TAUser currUser = new TAUser();
     var users = UserManager.Users.ToArray();
@@ -32,13 +32,18 @@
     }
     var userRoll = await UserManager.GetRolesAsync(currUser);
 }
+@section Scripts{
+    <script src="~/js/Course/note.js" asp-append-version="true"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+}
 
 <h1>All Courses</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" id="course_table">
     <thead>
         <tr>
             <th>
@@ -136,7 +141,9 @@
                 if (userRoll.First() == "Administrator")
                 {
                     <td>
-                        @Html.DisplayFor(modelItem => item.Note)
+                        <input type="text" id="note_@item.ID" value="@item.Note">
+                        <br>
+                        <button onclick="Change_Note('@item.ID')">Save Note</button>
                     </td>
                 }
             }
