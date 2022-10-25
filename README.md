@@ -11,7 +11,7 @@ Copyright:  CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copie
 ```
 # AWS Deployments:
 
-Cole - https://ec2-3-234-13-43.compute-1.amazonaws.com/
+Cole - https://3.211.128.95.nip.io/
 
 Tyler - https://3.94.140.199.nip.io/
 
