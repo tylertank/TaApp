@@ -1,7 +1,7 @@
 /**
  * Author:    Cole Hanlon
  * Partner:   Tyler Harkness
- * Date:      9/27/2022
+ * Date:      10/24/2022
  * Course:    CS 4540, University of Utah, School of Computing
  * Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
  *
@@ -35,6 +35,13 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
+builder.Services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                 
+                    options.ClientId = builder.Configuration.GetValue<string>("Google:ClientID");
+                    options.ClientSecret = builder.Configuration.GetValue<string>("Google:Secret");
+                });
 
 var app = builder.Build();
 //gets the usermanager, DB context, and role manager.
@@ -52,8 +59,12 @@ using (var scope = app.Services.CreateScope())
     {
         await DB.InitializeUsers(um, rm);
         await DB.IntializeApplication(um, context);
+        await DB.IntializeCourses(um, context);
     }
 }
+
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -3,6 +3,21 @@
 @{
     ViewData["Title"] = "Register";
 }
+<!--
+  Author:    Cole Hanlon
+  Partner:   Tyler Harkness
+  Date:      10/24/2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: Microsoft Corporation, CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+
+  I, Cole Hanlon & Tyler Harkness, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     This ExternalLogin.cshtml file contains all contents for a webpage to complete the model of a TAUser after using Google
+     authentication.
+-->
 
 <h1>@ViewData["Title"]</h1>
 <h2 id="external-login-title">Associate your @Model.ProviderDisplayName account.</h2>
@@ -23,7 +38,14 @@
                 <label asp-for="Input.Email" class="form-label"></label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
+             <div class="form-floating">
+                <input asp-for="Input.Unid" class="form-control" autocomplete="Unid" />
+                <label asp-for="Input.Unid" class="form-label"></label>
+                <span asp-validation-for="Input.Unid" class="text-danger"></span>
+            </div>
+           
             <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+
         </form>
     </div>
 </div>

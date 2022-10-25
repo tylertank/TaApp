@@ -27,23 +27,26 @@ namespace TAApplication.Areas.Identity.Services;
 public class EmailSender : IEmailSender
 {
     private readonly ILogger _logger;
+    private IConfiguration _config;
 
     public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor,
-                       ILogger<EmailSender> logger)
+                       ILogger<EmailSender> logger, IConfiguration configuration)
     {
         Options = optionsAccessor.Value;
         _logger = logger;
+        _config = configuration;
     }
 
     public AuthMessageSenderOptions Options { get; } //Set with Secret Manager.
 
     public async Task SendEmailAsync(string toEmail, string subject, string message)
     {
-        if (string.IsNullOrEmpty(Options.SendGridKey))
+        string sendGrid = _config.GetValue<string>("SendGrid:Key");
+        if (sendGrid == null)
         {
             throw new Exception("Null SendGridKey");
         }
-        await Execute(Options.SendGridKey, subject, message, toEmail);
+        await Execute(_config.GetValue<string>("SendGrid:Key"), subject, message, toEmail);
     }
 
     /// <summary>

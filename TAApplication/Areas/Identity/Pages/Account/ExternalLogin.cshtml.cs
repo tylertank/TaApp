@@ -1,4 +1,19 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+﻿/**
+ * Author:    Cole Hanlon
+ * Partner:   Tyler Harkness
+ * Date:      10/24/2022
+ * Course:    CS 4540, University of Utah, School of Computing
+ * Copyright: Microsoft Corporation, CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+ *
+ * I, Cole Hanlon & Tyler harkness, certify that I have made modifications to this code based on course
+ * guidance. The base code has been provided through tutorials from Microsoft Corporation. 
+ *
+ * File Contents
+ *
+ *   This ExternalLogin.cs file contains the integration with google sign in. creating a applicant 
+ *   account if they do not have one and logging them in if they do.
+ */
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
@@ -18,6 +33,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using TAApplication.Areas.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace TAApplication.Areas.Identity.Pages.Account
 {
@@ -85,6 +101,10 @@ namespace TAApplication.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+            [Required]
+            [RegularExpression("^u[0-9]{7}")]
+            public string Unid { get; set; }
+            public string Name { get; set; }
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -153,10 +173,12 @@ namespace TAApplication.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                user.Unid = Input.Unid;
+                user.FullName = info.Principal.FindFirstValue(ClaimTypes.Name);
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-
+                
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -167,6 +189,7 @@ namespace TAApplication.Areas.Identity.Pages.Account
 
                         var userId = await _userManager.GetUserIdAsync(user);
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        await _userManager.AddToRoleAsync(user, "Applicant");
                         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                         var callbackUrl = Url.Page(
                             "/Account/ConfirmEmail",

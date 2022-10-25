@@ -1,0 +1,161 @@
+﻿<!--
+  Author:    Cole Hanlon
+  Partner:   Tyler Harkness
+  Date:      10/24/2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+
+  I, Cole Hanlon & Tyler Harkness, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     This list.cshtml contains a detailed list of all courses that have been created.
+-->
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Areas.Data
+@model IEnumerable<TAApplication.Models.Course>
+@inject SignInManager<TAUser> SignInManager
+@inject UserManager<TAUser> UserManager
+@inject RoleManager<IdentityRole> rm
+@{
+    ViewData["Title"] = "List";
+
+    TAUser currUser = new TAUser();
+    var users = UserManager.Users.ToArray();
+    foreach (var user in users)
+    {
+        if (user.UserName == User.Identity?.Name)
+        {
+            currUser = user;
+        }
+    }
+    var userRoll = await UserManager.GetRolesAsync(currUser);
+}
+@section Scripts{
+    <script src="~/js/Course/note.js" asp-append-version="true"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+}
+
+<h1>All Courses</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+    <div class="table-responsive">
+<table class="table" id="course_table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.semesterOffered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.yearOffered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.courseNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.section)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.professorUID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.professorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dayAndTimeOffered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.creditHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.enrollment)
+            </th>
+            @{
+                if(userRoll.First() == "Administrator"){
+                    <th>
+                        @Html.DisplayNameFor(model => model.Note)
+                    </th>
+                }
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.semesterOffered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.yearOffered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.courseNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.section)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.professorUID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.professorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dayAndTimeOffered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.creditHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.enrollment)
+            </td>
+            @{
+                if (userRoll.First() == "Administrator")
+                {
+                    <td>
+                        <input type="text" id="note_@item.ID" value="@item.Note">
+                        <br>
+                        <button onclick="Change_Note('@item.ID')">Save Note</button>
+                    </td>
+                }
+            }
+
+            <td>
+                <a asp-action="Update" asp-route-id="@item.ID">Update</a> |
+                <a asp-action="View" asp-route-id="@item.ID">View</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,137 @@
+﻿<!--
+  Author:    Cole Hanlon
+  Partner:   Tyler Harkness
+  Date:      10/24/2022
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+
+  I, Cole Hanlon & Tyler Harkness, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     This View.cshtml file contains all contents for a asp .netcore page allowing an applicant, professor, and administrator to view a course
+    through the TA program web system. This page has been written to work on varying screen sizes.
+-->
+@model TAApplication.Models.Course
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Areas.Data
+@inject SignInManager<TAUser> SignInManager
+@inject UserManager<TAUser> UserManager
+@inject RoleManager<IdentityRole> rm
+@{
+    ViewData["Title"] = "Details";
+
+    TAUser currUser = new TAUser();
+    var users = UserManager.Users.ToArray();
+    foreach (var user in users)
+    {
+        if (user.UserName == User.Identity?.Name)
+        {
+            currUser = user;
+        }
+    }
+    var userRoll = await UserManager.GetRolesAsync(currUser);
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.semesterOffered)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.semesterOffered)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.yearOffered)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.yearOffered)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.department)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.department)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.courseNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.courseNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.section)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.section)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.professorUID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.professorUID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.professorName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.professorName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dayAndTimeOffered)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dayAndTimeOffered)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.location)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.location)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.creditHours)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.creditHours)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.enrollment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.enrollment)
+        </dd>
+        @{
+            if (userRoll.First() == "Administrator")
+            {
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Note)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.Note)
+                </dd>
+            }
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Update" asp-route-id="@Model?.ID">Update</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
