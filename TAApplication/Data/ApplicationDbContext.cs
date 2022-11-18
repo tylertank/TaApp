@@ -366,5 +366,12 @@ namespace TAApplication.Data
         /// 
         /// </summary>
         public DbSet<TAApplication.Models.Course> Course { get; set; }
+        /// <summary>
+        /// JIM: this code adds time/user to DB entry
+        /// 
+        /// Check the DB tracker to see what has been modified, and add timestamps/names as appropriate.
+        /// 
+        /// </summary>
+        public DbSet<TAApplication.Models.Slot> Slot { get; set; }
     }
 }
