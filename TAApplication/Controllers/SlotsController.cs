@@ -21,9 +21,15 @@ namespace TAApplication.Controllers
 
 
         // GET: Slots
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-              return View(await _context.Slot.ToListAsync());
+            if (id == null || _context.Slot == null)
+            {
+                return NotFound();
+            }
+
+
+            return View(await _context.Slot.ToListAsync());
         }
 
         // GET: Slots/Details/5
