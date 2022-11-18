@@ -1,10 +1,63 @@
 ﻿@model IEnumerable<TAApplication.Models.Slot>
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Areas.Data
+@inject SignInManager<TAUser> SignInManager
+@inject UserManager<TAUser> UserManager
+@inject RoleManager<IdentityRole> rm
 
+@section scripts{
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.0.4/pixi.js"></script>
+    <script type="text/javascript" src="~/js/Slot/setup.js">      </script>
+    <script type="text/javascript" src="~/js/Slot/checker.js">      </script>
+    <script type="text/javascript">
+      $(function()
+      {
+        setup_pixi_stage(700,400);
+
+        let checker = new Checker(50,0xFF0000);
+
+        app.stage.addChild( checker );
+        
+      });
+      </script>
+}
 @{
     ViewData["Title"] = "Index";
 }
+@{
+  TAUser currUser = new TAUser();
+        var users = UserManager.Users.ToArray();
+       foreach(var user in users){
+           if(user.UserName == User.Identity?.Name){
+                currUser = user;
+           }
+       } 
 
-<h1>Index</h1>
+    <h1> @currUser.FullName's Avaliability</h1>
+ 
+}
+
+
+
+
+
+
+
+
+
+
+<div id="canvas_div">test</div>
+
+
+
+
+
+
+
+
+
 
 <p>
     <a asp-action="Create">Create New</a>

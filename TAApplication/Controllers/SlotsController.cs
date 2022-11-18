@@ -19,6 +19,7 @@ namespace TAApplication.Controllers
             _context = context;
         }
 
+
         // GET: Slots
         public async Task<IActionResult> Index()
         {
