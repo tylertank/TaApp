@@ -32,9 +32,10 @@
         x = 25;
         width = 100;
         y = 112.5;
+        var count = 0;
         for (let i = 0; i < 5; i++) {
             for (let i = 0; i < 48; i++) {
-                var timeslot = new Slot(x, y, 25, width, 0xCB0000)
+                var timeslot = new Slot(x, y, 25, width, 0xCB0000, count++)
                 y += 25;
                 app.stage.addChild(timeslot)
             }

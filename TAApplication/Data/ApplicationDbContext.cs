@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using SendGrid.Helpers.Mail;
+using System.Globalization;
 using TAApplication.Areas.Data;
 using TAApplication.Models;
 using static System.Net.Mime.MediaTypeNames;
@@ -119,6 +120,55 @@ namespace TAApplication.Data
             await um.AddToRoleAsync(app0, "Applicant");
             await um.AddToRoleAsync(app1, "Applicant");
             await um.AddToRoleAsync(app2, "Applicant");
+
+        }
+        public async Task IntializeSlots(UserManager<TAUser> um, ApplicationDbContext context)
+        {
+
+            var users = um.Users;
+            TAUser u0 = null;
+            TAUser u1 = null;
+            foreach (TAUser u in users)
+            {
+                if (u.Unid == "u0000000")
+                {
+                    u0 = u;
+                }
+                else if (u.Unid == "u0000001")
+                {
+                    u1 = u;
+                }
+            }
+
+            var slot1 = new Slot();
+            var slot2 = new Slot();
+            var slot3 = new Slot();
+            var slot4 = new Slot();
+
+            slot1.open = false;
+            slot2.open = false;
+            slot3.open = false;
+            slot4.open = false;
+
+            slot1.TAUser = u1;
+            slot2.TAUser = u1;
+            slot3.TAUser = u1;
+            slot4.TAUser = u1;
+
+            //slot1.ID = 0;
+            //slot2.ID = 1;
+            //slot3.ID = 2;
+            //slot4.ID = 3;
+            slot1.Time = "monday 8:00 am";
+            slot2.Time = "monday 8:15 am";
+            slot3.Time = "monday 8:30 am";
+            slot4.Time = "monday 8:45 am";
+
+            context.Slot.Add(slot1);
+            context.Slot.Add(slot2);
+            context.Slot.Add(slot3);
+            context.Slot.Add(slot4);
+            await context.SaveChangesAsync();
 
         }
 

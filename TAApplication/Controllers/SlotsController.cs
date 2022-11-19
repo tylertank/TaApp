@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using TAApplication.Areas.Data;
 using TAApplication.Data;
 using TAApplication.Models;
 
@@ -21,13 +22,13 @@ namespace TAApplication.Controllers
 
 
         // GET: Slots
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index(string? id)
         {
             if (id == null || _context.Slot == null)
             {
                 return NotFound();
             }
-
+            var test = _context.Slot.Where(o => o.TAUser.Unid == id).ToList();
 
             return View(await _context.Slot.ToListAsync());
         }

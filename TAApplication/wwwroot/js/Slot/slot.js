@@ -1,9 +1,10 @@
 ﻿class Slot extends PIXI.Graphics {
 
-    constructor(x, y, width, height, color) {
+    constructor(x, y, width, height, color, ID) {
         super();
         this.saved_x = x;
         this.saved_y = y;
+        this.ID = ID;
         this.saved_width = width;
         this.saved_height = height;
         this.saved_color = color;
@@ -15,7 +16,7 @@
     }
 
     mouse_handler() {
-        console.log("here");
+        console.log(this.ID);
         if (this.saved_color == 0x01BB2F) {
             this.saved_color = 0xCB0000;
         }
