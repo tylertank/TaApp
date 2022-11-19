@@ -34,11 +34,11 @@
         y = 112.5;
         for (let i = 0; i < 5; i++) {
             for (let i = 0; i < 48; i++) {
-                var timeslot = new Slot(x, y, 100, width, 0xCB0000)
-                y+= 25;
+                var timeslot = new Slot(x, y, 25, width, 0xCB0000)
+                y += 25;
                 app.stage.addChild(timeslot)
             }
-            x+=175;
+            x += 175;
             y = 112.5;
         }
 
