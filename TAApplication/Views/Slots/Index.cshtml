@@ -11,15 +11,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.0.4/pixi.js"></script>
     <script type="text/javascript" src="~/js/Slot/setup.js">      </script>
     <script type="text/javascript" src="~/js/Slot/slot.js">      </script>
-
+    <script type="text/javascript" src="~/js/Slot/line.js">      </script>
+    <script type="text/javascript" src="~/js/Slot/days.js">      </script>
+    <script type="text/javascript" src="~/js/Slot/times.js">      </script>
     <script type="text/javascript">
     $(function testing() {
-        setup_pixi_stage(700, 400);
+        setup_pixi_stage(1000, 1400);
+        var line = new Line(25, 75, 950, 0xFFFFFF);
+        var days = new Days();
+        var times = new Times();
+        let x = 25;
+        let width = 850;
+        let y = 112.5;
+        for (let i = 0; i < 13; i++) {
+            var timeline = new Line(x, y, width, 0xA2A4A4)
+            y+= 100;
+            app.stage.addChild(timeline)
+        }
 
-        var slot = new Slot(50, 100, 0xFFFFFF);
+        x = 25;
+        width = 100;
+        y = 112.5;
+        for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 48; i++) {
+                var timeslot = new Slot(x, y, 100, width, 0xCB0000)
+                y+= 25;
+                app.stage.addChild(timeslot)
+            }
+            x+=175;
+            y = 112.5;
+        }
 
-        app.stage.addChild(slot);
-
+        app.stage.addChild(line);
+        app.stage.addChild(days);
+        app.stage.addChild(times);
     });
 </script>
 
