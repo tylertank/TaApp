@@ -156,14 +156,14 @@ namespace TAApplication.Controllers
             {
                 _context.Slot.Remove(slot);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SlotExists(int id)
         {
-          return _context.Slot.Any(e => e.ID == id);
+            return _context.Slot.Any(e => e.ID == id);
         }
     }
 }

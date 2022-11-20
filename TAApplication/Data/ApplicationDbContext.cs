@@ -159,10 +159,10 @@ namespace TAApplication.Data
             //slot2.ID = 1;
             //slot3.ID = 2;
             //slot4.ID = 3;
-            slot1.Time = "monday 8:00 am";
-            slot2.Time = "monday 8:15 am";
-            slot3.Time = "monday 8:30 am";
-            slot4.Time = "monday 8:45 am";
+            slot1.Time = 0;
+            slot2.Time = 1;
+            slot3.Time = 2;
+            slot4.Time = 3;
 
             context.Slot.Add(slot1);
             context.Slot.Add(slot2);

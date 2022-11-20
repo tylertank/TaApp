@@ -14,7 +14,7 @@ namespace TAApplication.Models
         public TAUser TAUser { get; set; } = null!;
 
         [Microsoft.Build.Framework.Required]
-        public string? Time { get; set; }
+        public int? Time { get; set; }
 
         [Microsoft.Build.Framework.Required]
         public bool open { get; set; }

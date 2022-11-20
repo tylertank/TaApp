@@ -15,52 +15,54 @@
     <script type="text/javascript" src="~/js/Slot/days.js">      </script>
     <script type="text/javascript" src="~/js/Slot/times.js">      </script>
     <script type="text/javascript">
-    $(function testing() {
-        setup_pixi_stage(1000, 1400);
-        var line = new Line(25, 75, 950, 0xFFFFFF);
-        var days = new Days();
-        var times = new Times();
-        let x = 25;
-        let width = 850;
-        let y = 112.5;
-        for (let i = 0; i < 13; i++) {
-            var timeline = new Line(x, y, width, 0xA2A4A4)
-            y+= 100;
-            app.stage.addChild(timeline)
-        }
-
-        x = 25;
-        width = 100;
-        y = 112.5;
-        var count = 0;
-        for (let i = 0; i < 5; i++) {
-            for (let i = 0; i < 48; i++) {
-                var timeslot = new Slot(x, y, 25, width, 0xCB0000, count++)
-                y += 25;
-                app.stage.addChild(timeslot)
+        $(function testing() {
+            setup_pixi_stage(1000, 1400);
+            var line = new Line(25, 75, 950, 0xFFFFFF);
+            var days = new Days();
+            var times = new Times();
+            let x = 25;
+            let width = 850;
+            let y = 112.5;
+            for (let i = 0; i < 13; i++) {
+                var timeline = new Line(x, y, width, 0xA2A4A4)
+                y += 100;
+                app.stage.addChild(timeline)
             }
-            x += 175;
-            y = 112.5;
-        }
 
-        app.stage.addChild(line);
-        app.stage.addChild(days);
-        app.stage.addChild(times);
-    });
-</script>
+            x = 25;
+            width = 100;
+            y = 112.5;
+            var count = 0;
+            for (let i = 0; i < 5; i++) {
+                for (let i = 0; i < 48; i++) {
+                    var timeslot = new Slot(x, y, 25, width, 0xCB0000, count++)
+                    y += 25;
+                    app.stage.addChild(timeslot)
+                }
+                x += 175;
+                y = 112.5;
+            }
+
+            app.stage.addChild(line);
+            app.stage.addChild(days);
+            app.stage.addChild(times);
+        });
+    </script>
 
 }
-@{
+    @{
     ViewData["Title"] = "Index";
 }
 @{
-  TAUser currUser = new TAUser();
-        var users = UserManager.Users.ToArray();
-       foreach(var user in users){
-           if(user.UserName == User.Identity?.Name){
-                currUser = user;
-           }
-       } 
+    TAUser currUser = new TAUser();
+    var users = UserManager.Users.ToArray();
+    foreach (var user in users)
+    {
+        if (user.UserName == User.Identity?.Name)
+        {
+            currUser = user;
+        }
+    }
 
     <h1> @currUser.FullName's Avaliability</h1>
 }

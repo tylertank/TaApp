@@ -16,7 +16,7 @@ namespace TAApplication.Data.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TAUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Time = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Time = table.Column<int>(type: "int", nullable: true),
                     open = table.Column<bool>(type: "bit", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false),

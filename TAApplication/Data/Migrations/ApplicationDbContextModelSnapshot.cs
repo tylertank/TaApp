@@ -390,8 +390,8 @@ namespace TAApplication.Data.Migrations
                     b.Property<string>("TAUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Time")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Time")
+                        .HasColumnType("int");
 
                     b.Property<bool>("open")
                         .HasColumnType("bit");

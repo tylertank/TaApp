@@ -12,7 +12,7 @@ using TAApplication.Data;
 namespace TAApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221118022427_slots table")]
+    [Migration("20221120162256_slots table")]
     partial class slotstable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -392,8 +392,8 @@ namespace TAApplication.Data.Migrations
                     b.Property<string>("TAUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Time")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Time")
+                        .HasColumnType("int");
 
                     b.Property<bool>("open")
                         .HasColumnType("bit");
