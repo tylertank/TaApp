@@ -9,6 +9,17 @@ namespace TAApplication.Models
 {
     public class Slot : ModificationTracking
     {
+        public Slot()
+        {
+
+        }
+        public Slot(TAUser tAUser, int? time, bool open)
+        {    
+            TAUser = tAUser;
+            Time = time;
+            this.open = open;
+        }
+    
         public int ID { get; set; }
       
         public TAUser TAUser { get; set; } = null!;

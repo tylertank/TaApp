@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using SendGrid.Helpers.Mail;
+using System.Collections;
 using System.Globalization;
 using TAApplication.Areas.Data;
 using TAApplication.Models;
@@ -139,35 +140,40 @@ namespace TAApplication.Data
                     u1 = u;
                 }
             }
+            ArrayList slotList = new ArrayList();
+            for(int i = 0; i < 240; i++)
+            {
+                if(i % 10 == 0)
+                {
+                    slotList.Add(new Slot(u1, i, false));
 
-            var slot1 = new Slot();
-            var slot2 = new Slot();
-            var slot3 = new Slot();
-            var slot4 = new Slot();
+                }
+                else
+                {
 
-            slot1.open = false;
-            slot2.open = false;
-            slot3.open = false;
-            slot4.open = false;
+                slotList.Add(new Slot(u1, i, true));
+                }
+            }
+            for (int j = 0; j < 240; j++)
+            {
+                if (j % 3 == 0)
+                {
+                    slotList.Add(new Slot(u0, j, false));
 
-            slot1.TAUser = u1;
-            slot2.TAUser = u1;
-            slot3.TAUser = u1;
-            slot4.TAUser = u1;
+                }
+                else
+                {
+                slotList.Add(new Slot(u0, j, true));
 
-            //slot1.ID = 0;
-            //slot2.ID = 1;
-            //slot3.ID = 2;
-            //slot4.ID = 3;
-            slot1.Time = 0;
-            slot2.Time = 1;
-            slot3.Time = 2;
-            slot4.Time = 3;
+                }
+            }
 
-            context.Slot.Add(slot1);
-            context.Slot.Add(slot2);
-            context.Slot.Add(slot3);
-            context.Slot.Add(slot4);
+            foreach (Slot slots in slotList)
+            {
+                context.Slot.Add(slots);
+            }
+
+         
             await context.SaveChangesAsync();
 
         }

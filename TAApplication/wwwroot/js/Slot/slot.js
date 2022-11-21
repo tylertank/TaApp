@@ -8,7 +8,7 @@
         this.saved_width = width;
         this.saved_height = height;
         this.saved_color = color;
-
+        this.avaliable = false;
         this.draw_self(x, y, width, height, color);
         this.interactive = true;
         this.on('mousedown', this.mouse_handler);
@@ -19,12 +19,15 @@
         this.changeColor();
     }
     changeColor() {
-        console.log(this.ID);
-        if (this.saved_color == 0x01BB2F) {
+        if (this.avaliable) {
+     
             this.saved_color = 0xCB0000;
+            this.avaliable = false;
         }
         else {
+  
             this.saved_color = 0x01BB2F
+            this.avaliable = true;
         }
         this.lineStyle(1, this.saved_color);
         this.beginFill(this.saved_color);
@@ -39,16 +42,3 @@
         this.endFill();
     }
 }
-   function changeColorArr(item, index, arr) {
-        console.log(item.ID);
-        if (item.saved_color == 0x01BB2F) {
-            item.saved_color = 0xCB0000;
-        }
-        else {
-            item.saved_color = 0x01BB2F
-        }
-        item.lineStyle(1, item.saved_color);
-        item.beginFill(item.saved_color);
-        item.drawRect(item.saved_x, item.saved_y, item.saved_height, item.saved_width);
-        item.endFill();
-    }

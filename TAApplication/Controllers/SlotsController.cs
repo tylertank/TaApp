@@ -41,7 +41,7 @@ namespace TAApplication.Controllers
                 return NotFound();
             }
             var test = _context.Slot.Where(o => o.TAUser.Unid == id).ToList();
-            return Ok(new {  myList = await _context.Slot.ToListAsync() });
+            return Ok(test);
         }
 
         // GET: Slots/Details/5
