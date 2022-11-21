@@ -16,6 +16,9 @@
     }
 
     mouse_handler() {
+        this.changeColor();
+    }
+    changeColor() {
         console.log(this.ID);
         if (this.saved_color == 0x01BB2F) {
             this.saved_color = 0xCB0000;
@@ -36,3 +39,16 @@
         this.endFill();
     }
 }
+   function changeColorArr(item, index, arr) {
+        console.log(item.ID);
+        if (item.saved_color == 0x01BB2F) {
+            item.saved_color = 0xCB0000;
+        }
+        else {
+            item.saved_color = 0x01BB2F
+        }
+        item.lineStyle(1, item.saved_color);
+        item.beginFill(item.saved_color);
+        item.drawRect(item.saved_x, item.saved_y, item.saved_height, item.saved_width);
+        item.endFill();
+    }

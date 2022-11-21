@@ -14,6 +14,7 @@
     <script type="text/javascript" src="~/js/Slot/line.js">      </script>
     <script type="text/javascript" src="~/js/Slot/days.js">      </script>
     <script type="text/javascript" src="~/js/Slot/times.js">      </script>
+
     <script type="text/javascript">
         $(function testing() {
             setup_pixi_stage(1000, 1400);
@@ -35,9 +36,9 @@
             var count = 0;
             for (let i = 0; i < 5; i++) {
                 for (let i = 0; i < 48; i++) {
-                    var timeslot = new Slot(x, y, 25, width, 0xCB0000, count++)
+                    var timeslot = new Slot(x, y, 25, width, 0xCB0000, count++);
                     y += 25;
-                    app.stage.addChild(timeslot)
+                    app.stage.addChildAt(timeslot,count);
                 }
                 x += 175;
                 y = 112.5;
@@ -46,9 +47,13 @@
             app.stage.addChild(line);
             app.stage.addChild(days);
             app.stage.addChild(times);
-        });
-    </script>
 
+    
+        });
+        
+    </script>
+    <script type="text/javascript" src="~/js/Slot/update.js">      </script>
+ 
 }
     @{
     ViewData["Title"] = "Index";

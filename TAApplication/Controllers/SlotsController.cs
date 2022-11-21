@@ -33,6 +33,17 @@ namespace TAApplication.Controllers
             return View(await _context.Slot.ToListAsync());
         }
 
+        // GET: Slots
+        public async Task<IActionResult> GetAvailabilities(string? id)
+        {
+            if (id == null || _context.Slot == null)
+            {
+                return NotFound();
+            }
+            var test = _context.Slot.Where(o => o.TAUser.Unid == id).ToList();
+            return Ok(new {  myList = await _context.Slot.ToListAsync() });
+        }
+
         // GET: Slots/Details/5
         public async Task<IActionResult> Details(int? id)
         {
