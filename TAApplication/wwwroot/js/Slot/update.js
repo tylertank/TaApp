@@ -1,6 +1,6 @@
 ﻿
 function getAvaliability1(data) {
-    $.get("../GetAvailabilities/"+data, function (myList) {
+    $.get("../GetSchedule/"+data, function (myList) {
         const slots = app.stage.children;
         const userAvaliability = myList;
         var numOfUser = userAvaliability.length;
@@ -12,4 +12,32 @@ function getAvaliability1(data) {
             }
         }
     });
+}
+
+
+function setAvaliability(data) {
+    const slots = app.stage.children;
+    const test = data;
+    const slotInfo = [];
+    for (var i = 1; i < 241; i++) {
+        var tempArr = [];
+        tempArr.push(slots[i].ID);
+        tempArr.push(slots[i].avaliable);
+        slotInfo.push(tempArr);
+    }
+
+   
+
+    $.post(
+        {
+            url: "/Slots/SetSchedule",
+            data: { id: test, schedule: JSON.stringify(slotInfo) }
+        })
+        .done(function (response) {
+            window.location.reload();
+            console.log("Done");
+        }).catch(error => {
+            window.location.reload();
+            console.log("Error");
+        });
 }

@@ -34,7 +34,17 @@ namespace TAApplication.Controllers
         }
 
         // GET: Slots
-        public async Task<IActionResult> GetAvailabilities(string? id)
+        public async Task<IActionResult> GetSchedule(string? id)
+        {
+            if (id == null || _context.Slot == null)
+            {
+                return NotFound();
+            }
+            var test = _context.Slot.Where(o => o.TAUser.Unid == id).ToList();
+            return Ok(test);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SetSchedule(string id, string schedule)
         {
             if (id == null || _context.Slot == null)
             {
