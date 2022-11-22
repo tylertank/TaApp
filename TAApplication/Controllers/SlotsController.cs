@@ -3,13 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AspNetCore;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using TAApplication.Areas.Data;
+
 using TAApplication.Data;
 using TAApplication.Models;
 
@@ -54,15 +53,15 @@ namespace TAApplication.Controllers
             {
                 return NotFound();
             }
-      
+
             bool[] sched = JsonConvert.DeserializeObject<bool[]>(schedule);
 
-           // var userSchedule = _context.Slot.Where(o => o.TAUser.Unid == id).ToList();
-           //for(int i = 0; i < userSchedule.Count; i++)
-           // {
-           //     userSchedule[i].open = sched[i];
-           // }
-          //  await _context.SaveChangesAsync();
+            var userSchedule = _context.Slot.Where(o => o.TAUser.Unid == id).ToList();
+            for (int i = 0; i < userSchedule.Count; i++)
+            {
+                userSchedule[i].open = sched[i];
+            }
+            await _context.SaveChangesAsync();
             return Ok();
         }
 

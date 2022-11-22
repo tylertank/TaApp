@@ -18,6 +18,17 @@
     mouse_handler() {
         this.changeColor();
     }
+
+    paintColor(open) {
+        if (!open) {
+            this.saved_color = 0x01BB2F
+            this.avaliable = true;
+        this.lineStyle(1, this.saved_color);
+        this.beginFill(this.saved_color);
+        this.drawRect(this.saved_x, this.saved_y, this.saved_height, this.saved_width);
+        this.endFill();
+        }
+    }
     changeColor() {
         if (this.avaliable) {
      

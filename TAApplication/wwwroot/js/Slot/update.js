@@ -6,8 +6,8 @@ function getAvaliability(data) {
         var numOfUser = userAvaliability.length;
         for (var i = 0; i < slots.length; i++) {
             for (var j = 0; j < userAvaliability.length; j++) {
-                if (slots[i].ID == userAvaliability[j].time && !userAvaliability[j].open) {
-                    slots[i].changeColor();
+                if (slots[i].ID == userAvaliability[j].time && userAvaliability[j].open) {
+                    slots[i].paintColor(userAvaliability[j].open);
                 }
             }
         }
