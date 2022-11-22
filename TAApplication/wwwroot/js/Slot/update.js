@@ -1,5 +1,5 @@
 ﻿
-function getAvaliability1(data) {
+function getAvaliability(data) {
     $.get("../GetSchedule/"+data, function (myList) {
         const slots = app.stage.children;
         const userAvaliability = myList;
@@ -20,10 +20,7 @@ function setAvaliability(data) {
     const test = data;
     const slotInfo = [];
     for (var i = 1; i < 241; i++) {
-        var tempArr = [];
-        tempArr.push(slots[i].ID);
-        tempArr.push(slots[i].avaliable);
-        slotInfo.push(tempArr);
+        slotInfo.push(slots[i].avaliable);
     }
 
    
