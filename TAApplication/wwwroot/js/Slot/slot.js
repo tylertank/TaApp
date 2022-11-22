@@ -20,7 +20,7 @@
     }
 
     paintColor(open) {
-        if (!open) {
+        if (open) {
             this.saved_color = 0x01BB2F
             this.avaliable = true;
         this.lineStyle(1, this.saved_color);
