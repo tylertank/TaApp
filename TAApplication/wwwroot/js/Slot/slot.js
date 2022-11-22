@@ -16,6 +16,7 @@
     }
 
     mouse_handler() {
+        $("#save").show();
         this.changeColor();
     }
 

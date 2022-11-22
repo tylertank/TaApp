@@ -145,25 +145,25 @@ namespace TAApplication.Data
             {
                 if(i % 10 == 0)
                 {
-                    slotList.Add(new Slot(u1, i, false));
+                    slotList.Add(new Slot(u1, i, true));
 
                 }
                 else
                 {
 
-                slotList.Add(new Slot(u1, i, true));
+                slotList.Add(new Slot(u1, i, false));
                 }
             }
             for (int j = 0; j < 240; j++)
             {
                 if (j % 3 == 0)
                 {
-                    slotList.Add(new Slot(u0, j, false));
+                    slotList.Add(new Slot(u0, j, true));
 
                 }
                 else
                 {
-                slotList.Add(new Slot(u0, j, true));
+                slotList.Add(new Slot(u0, j, false));
 
                 }
             }

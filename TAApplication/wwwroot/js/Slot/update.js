@@ -1,6 +1,6 @@
 ﻿
 function getAvaliability(data) {
-    $.get("../GetSchedule/"+data, function (myList) {
+    $.get("/Slots/GetSchedule/"+data, function (myList) {
         const slots = app.stage.children;
         const userAvaliability = myList;
         var numOfUser = userAvaliability.length;
@@ -16,6 +16,8 @@ function getAvaliability(data) {
 
 
 function setAvaliability(data) {
+    $("#spinner").show();
+
     const slots = app.stage.children;
     const test = data;
     const slotInfo = [];
@@ -31,10 +33,13 @@ function setAvaliability(data) {
             data: { id: test, schedule: JSON.stringify(slotInfo) }
         })
         .done(function (response) {
-            window.location.reload();
+            $("#save").hide();
             console.log("Done");
         }).catch(error => {
+
             window.location.reload();
             console.log("Error");
-        });
+        }).always(function () {
+            $("#spinner").hide();
+        });;
 }
