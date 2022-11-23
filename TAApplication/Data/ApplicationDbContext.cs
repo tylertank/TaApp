@@ -14,9 +14,13 @@
 */
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using SendGrid.Helpers.Mail;
+using System.Collections;
+using System.Globalization;
+using System.Xml.Linq;
 using TAApplication.Areas.Data;
 using TAApplication.Models;
 using static System.Net.Mime.MediaTypeNames;
@@ -28,6 +32,7 @@ namespace TAApplication.Data
     {
         BS
     }
+
     public class ApplicationDbContext : IdentityDbContext<TAUser>
     {
         public IHttpContextAccessor _httpContextAccessor;
@@ -119,6 +124,65 @@ namespace TAApplication.Data
             await um.AddToRoleAsync(app0, "Applicant");
             await um.AddToRoleAsync(app1, "Applicant");
             await um.AddToRoleAsync(app2, "Applicant");
+
+        }
+        public async Task IntializeSlots(UserManager<TAUser> um, ApplicationDbContext context)
+        {
+
+            var users = um.Users;
+            TAUser u0 = null;
+            TAUser u1 = null;
+            foreach (TAUser u in users)
+            {
+                if (u.Unid == "u0000000")
+                {
+                    u0 = u;
+                }
+                else if (u.Unid == "u0000001")
+                {
+                    u1 = u;
+                }
+            }
+            ArrayList slotList = new ArrayList();
+              
+            for(int i = 0; i < 240; i++)
+            {
+                if(i < 16 ||( i >= 192 && i < 208))
+                {
+                    slotList.Add(new Slot(u0, i, true));
+
+                }else if(( i >= 64 && i < 84) || i >= 160 && i < 180)
+                {
+                    slotList.Add(new Slot(u0, i, true));
+
+                }
+                else
+                {
+
+                slotList.Add(new Slot(u0, i, false));
+                }
+            }
+            for (int j = 0; j < 240; j++)
+            {
+                if (j % 3 == 0)
+                {
+                    slotList.Add(new Slot(u1, j, true));
+
+                }
+                else
+                {
+                slotList.Add(new Slot(u1, j, false));
+
+                }
+            }
+
+            foreach (Slot slots in slotList)
+            {
+                context.Slot.Add(slots);
+            }
+
+         
+            await context.SaveChangesAsync();
 
         }
 
@@ -366,5 +430,12 @@ namespace TAApplication.Data
         /// 
         /// </summary>
         public DbSet<TAApplication.Models.Course> Course { get; set; }
+        /// <summary>
+        /// JIM: this code adds time/user to DB entry
+        /// 
+        /// Check the DB tracker to see what has been modified, and add timestamps/names as appropriate.
+        /// 
+        /// </summary>
+        public DbSet<TAApplication.Models.Slot> Slot { get; set; }
     }
 }

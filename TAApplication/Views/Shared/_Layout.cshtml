@@ -78,7 +78,7 @@ Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied
                                 <li class="nav-item"><a class="nav-link text-light" asp-controller="Admin" asp-action="Roles">Roles</a></li>
 
                             }
-                        <li class="nav-item dropdown">
+                           <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-light" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">TA Menu</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown04">
                             <li><a class="dropdown-item">Cole Hanlon, Tyler Harkness</a></li>
@@ -87,13 +87,13 @@ Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied
                                 var course = await _context.Course.FirstOrDefaultAsync();
                                }
                             <li><hr /></li>
-                            <li>PS6</li>
-                            <li><a class="dropdown-item" asp-controller="Courses" asp-action="List">Courses List</a></li>
-                            <li><a class="dropdown-item" asp-controller="Courses" asp-action="View" asp-route-id="@course.ID">View First Course</a></li>
-                            <li><a class="dropdown-item" asp-controller="Courses" asp-action="Update" asp-route-id="@course.ID">Update First Course</a></li>
-                            <li><a class="dropdown-item" asp-controller="Courses" asp-action="Create">Create New Course</a></li>
+                            <li>PS8</li>
+                            <li><a class="dropdown-item" asp-controller="Applications" asp-action="Index">Application Index</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Availability" asp-action="Index">Avaliability</a></li>
                             </ul>
-                         </li>
+                            </li>
+
+                           
                         }
                     </ul>
                     <partial name="_LoginPartial" />

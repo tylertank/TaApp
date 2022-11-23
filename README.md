@@ -1,31 +1,27 @@
 ```
 Author:     Cole Hanlon
 Partner:    Tyler Harkness
-Date:       24-Oct-2022
+Date:       23-Nov-2022
 Course:     CS 4540, University of Utah, School of Computing
 GitHub ID:  ColeHanlon, tylertank
 Repo:       https://github.com/uofu-cs4540-fall2022/taapplication-webmoguls
-Commit Tag: PS6
+Commit Tag: PS8
 Project:    TA Application
 Copyright:  CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
 ```
-# AWS Deployments:
-
-Cole - https://3.211.128.95.nip.io/
-
-Tyler - https://3.94.140.199.nip.io/
-
 # Overview of the TA Application Functionality 
 
-We have now added the functionality to sign in and register with a google account. And also started the process of implementing courses into our project. Admins can now create, view, edit and delete courses. Professors are also able to view a list of course info, without viewing notes. To make creating a course as easy as possible for an administrator, We decided instead of having the administrator having to know the professors Name and UnID before creating the course. We created a drop down menu for the professor's UnID that displays the professor's full name and UnID. This enables the Admin to quickly and easily select which professor is teaching the course.
+We have now added the functionality for users to view, and update their availability. We have implemented this in a very similar way as seen in the assignment details. One design choice we made is not adding the ability for dragging. We saw the issues that can arise in Lecture, such as having inconsistent selection, and causing troubles for the user. We do not expect a user to have too much availability, or have to update this often, therefore, just selecting each time slot is fine in our eyes. 
 
 # Comments to Evaluators:
 
-As of submitting this assignment we are not aware of any bugs. We have made sure to adjust all buttons and functionality according the assignment specifications. We do not believe we have implemented any different design choices than standard.
+As of submitting this assignment we are not aware of any bugs. We have updated the grading links in the nav bar for this assignment as listed in the assignment details. We did layout our JavaScript a bit different than what is described in the assignment details. We followed the example website provided by the professor, and made many seperate JavaScript classes. We think this makes things more understandable, rather than the single class which does everything described in the assignment details. We use AvailabilityTracker.js to hold our setup function, which then constructs our individual components which are defined as their own JavaScript classes. 
 
 # Assignment Specific Topics
 
-None listed in assignment details.
+Above and Beyond
+
+We have mostly focused on a working solution, and have not done much beyond the assignment details. We decided to simplify access to this page, by only allowing Applicants to view it, and then showing the logged in user their availability. This limits the need for parameters withn the link, and you can easily navigate to the page. We have added a button within viewing your application to set your availability. We feel this is useful as when you complete the application, you will see this button and can complete this step.
 
 # Consulted Peers:
 
@@ -49,7 +45,8 @@ common liscensing when possible.
 
 # References:
     
-    1. Google external login - https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-5.0
+    1. Pixi Graphics Docs - https://pixijs.download/dev/docs/PIXI.Graphics.html
+    2. Pixi Lines - https://www.html5gamedevs.com/topic/28098-simple-lines-with-pixijs/
 
 # Time Expenditures:
 
@@ -58,6 +55,7 @@ common liscensing when possible.
     4. Assignment Four: Predicted Hours: 8 Actual Hours: 10
     5. Assignment Five: Predicted Hours: 10 Actual Hours: 10
     6. Assignment Six: Predicted Hours: 6 Actual Hours: 5
+    8. Assignment Eight: Predicted Hours: 10 Actual Hours: 10
 
     
     
