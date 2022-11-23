@@ -16,7 +16,7 @@
 
 //Retrieves the availability of the input student
 function getAvaliability(data) {
-    $.get("/Slots/GetSchedule/"+data, function (myList) {
+    $.get("/Avaliability/GetSchedule/"+data, function (myList) {
         const slots = app.stage.children;
         const userAvaliability = myList;
         var numOfUser = userAvaliability.length;
@@ -43,7 +43,7 @@ function setAvaliability(data) {
 
     $.post(
         {
-            url: "/Slots/SetSchedule",
+            url: "/Avaliability/SetSchedule",
             data: { id: test, schedule: JSON.stringify(slotInfo) }
         })
         .done(function (response) {
