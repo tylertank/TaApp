@@ -20,6 +20,7 @@ using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using SendGrid.Helpers.Mail;
 using System.Collections;
 using System.Globalization;
+using System.Xml.Linq;
 using TAApplication.Areas.Data;
 using TAApplication.Models;
 using static System.Net.Mime.MediaTypeNames;
@@ -31,6 +32,7 @@ namespace TAApplication.Data
     {
         BS
     }
+
     public class ApplicationDbContext : IdentityDbContext<TAUser>
     {
         public IHttpContextAccessor _httpContextAccessor;

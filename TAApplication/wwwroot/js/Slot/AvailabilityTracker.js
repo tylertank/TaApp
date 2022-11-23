@@ -56,7 +56,7 @@ function setup_pixi_stage(width, height, uid) {
     app.stage.addChild(line);
     app.stage.addChild(days);
     app.stage.addChild(times);
-    getAvaliability(uid);
+    getAvailability(uid);
 
     $($("#spinner").hide());
     $($("#save").hide());

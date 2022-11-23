@@ -15,8 +15,8 @@
  */
 
 //Retrieves the availability of the input student
-function getAvaliability(data) {
-    $.get("/Avaliability/GetSchedule/"+data, function (myList) {
+function getAvailability(data) {
+    $.get("/Availability/GetSchedule/"+data, function (myList) {
         const slots = app.stage.children;
         const userAvaliability = myList;
         var numOfUser = userAvaliability.length;
@@ -31,7 +31,7 @@ function getAvaliability(data) {
 }
 
 //Connects to server endpoint, and passes updated list of availability
-function setAvaliability(data) {
+function setAvailability(data) {
     $("#spinner").show();
 
     const slots = app.stage.children;
@@ -43,7 +43,7 @@ function setAvaliability(data) {
 
     $.post(
         {
-            url: "/Avaliability/SetSchedule",
+            url: "/Availability/SetSchedule",
             data: { id: test, schedule: JSON.stringify(slotInfo) }
         })
         .done(function (response) {
@@ -55,5 +55,5 @@ function setAvaliability(data) {
             console.log("Error");
         }).always(function () {
             $("#spinner").hide();
-        });;
+        });
 }

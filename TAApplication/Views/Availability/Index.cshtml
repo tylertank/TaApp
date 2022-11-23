@@ -55,10 +55,10 @@
     @{
     ViewData["Title"] = "Index";
 }
-<h1> @currUser.FullName's Avaliability</h1>
+<h1> @currUser.FullName's Availability</h1>
 <p>Please select all 15 minute periods in which you are available to work each week through the semester.</p>
 <hr />
-<button class="btn btn-warning" id="save" onclick="setAvaliability('@currUser.Unid')">Save Note</button>
+<button class="btn btn-warning" id="save" onclick="setAvailability('@currUser.Unid')">Save Note</button>
 <div class="content">
     <div class="spinner-border text-light" id="spinner" role="status">
     </div>

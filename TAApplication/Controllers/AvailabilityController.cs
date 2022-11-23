@@ -34,11 +34,11 @@ namespace TAApplication.Controllers
     /// Defines methods to control an applicant's availability
     /// </summary>
     [Authorize(Roles = "Applicant")]
-    public class AvaliabilityController : Controller
+    public class AvailabilityController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AvaliabilityController(ApplicationDbContext context)
+        public AvailabilityController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -86,6 +86,7 @@ namespace TAApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> SetSchedule(string id, string schedule)
         {
+            
             if (id == null || _context.Slot == null)
             {
                 return NotFound();
