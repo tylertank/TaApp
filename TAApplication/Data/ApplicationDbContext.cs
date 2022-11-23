@@ -14,6 +14,7 @@
 */
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using SendGrid.Helpers.Mail;
@@ -141,29 +142,34 @@ namespace TAApplication.Data
                 }
             }
             ArrayList slotList = new ArrayList();
+              
             for(int i = 0; i < 240; i++)
             {
-                if(i % 10 == 0)
+                if(i < 16 ||( i >= 192 && i < 208))
                 {
-                    slotList.Add(new Slot(u1, i, true));
+                    slotList.Add(new Slot(u0, i, true));
+
+                }else if(( i >= 64 && i < 84) || i >= 160 && i < 180)
+                {
+                    slotList.Add(new Slot(u0, i, true));
 
                 }
                 else
                 {
 
-                slotList.Add(new Slot(u1, i, false));
+                slotList.Add(new Slot(u0, i, false));
                 }
             }
             for (int j = 0; j < 240; j++)
             {
                 if (j % 3 == 0)
                 {
-                    slotList.Add(new Slot(u0, j, true));
+                    slotList.Add(new Slot(u1, j, true));
 
                 }
                 else
                 {
-                slotList.Add(new Slot(u0, j, false));
+                slotList.Add(new Slot(u1, j, false));
 
                 }
             }
