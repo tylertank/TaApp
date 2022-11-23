@@ -1,12 +1,27 @@
-﻿class Times extends PIXI.Graphics {
+﻿/**
+ * Author:    Cole Hanlon
+ * Partner:   Tyler Harkness
+ * Date:      11/22/2022
+ * Course:    CS 4540, University of Utah, School of Computing
+ * Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+ *
+ * I, Cole Hanlon & Tyler harkness, certify that I have made modifications to this code based on course
+ * guidance. The base code has been provided through tutorials from Microsoft Corporation. 
+ *
+ * File Contents
+ *
+ *   This file creates a Times object, which draws all times vertically down right side of the canvas
+ */
 
+class Times extends PIXI.Graphics {
+    //Constructs object and draws
     constructor() {
         super();
 
         this.draw_self();
-
     }
 
+    //Draws all times along right side of canvas
     draw_self() {
         const eightam = this.addChild(
             new PIXI.Text("8:00 am", {

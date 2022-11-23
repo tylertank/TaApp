@@ -1,4 +1,20 @@
-﻿
+﻿/**
+ * Author:    Cole Hanlon
+ * Partner:   Tyler Harkness
+ * Date:      11/22/2022
+ * Course:    CS 4540, University of Utah, School of Computing
+ * Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
+ *
+ * I, Cole Hanlon & Tyler harkness, certify that I have made modifications to this code based on course
+ * guidance. The base code has been provided through tutorials from Microsoft Corporation. 
+ *
+ * File Contents
+ *
+ *   This file defines methods to retrieve and update an applicants availability. Retrieves from the web server endpoint set up in
+ *   the corresponding controller.
+ */
+
+//Retrieves the availability of the input student
 function getAvaliability(data) {
     $.get("/Slots/GetSchedule/"+data, function (myList) {
         const slots = app.stage.children;
@@ -14,7 +30,7 @@ function getAvaliability(data) {
     });
 }
 
-
+//Connects to server endpoint, and passes updated list of availability
 function setAvaliability(data) {
     $("#spinner").show();
 
@@ -24,8 +40,6 @@ function setAvaliability(data) {
     for (var i = 1; i < 241; i++) {
         slotInfo.push(slots[i].avaliable);
     }
-
-   
 
     $.post(
         {
