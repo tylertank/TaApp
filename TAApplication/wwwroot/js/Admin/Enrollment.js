@@ -60,3 +60,38 @@ $(function () {
 $(function () {
     $("#endDate").datepicker();
 });
+
+function getData() {
+    var startDate = $("#startDate").val();
+    var endDate = $("#endDate").val();
+    var course = $("#course").val();
+    var courseInfo = course.split(" ");
+
+    $.get(
+        {
+            url: "/Admin/GetEnrollmentData/",
+            data: { start: startDate, end: endDate, dept: courseInfo[0], courseNum: courseInfo[1] }
+        })
+        .done(function (response) {
+            $("#save").hide();
+            console.log("Done");
+        }).catch(error => {
+
+            window.location.reload();
+            console.log("Error");
+        }).always(function () {
+            $("#spinner").hide();
+        });
+    /*$.get("/Admin/GetEnrollmentData/", function (myList) {
+
+        const userAvaliability = myList;
+        var numOfUser = userAvaliability.length;
+
+        for (var j = 0; j < userAvaliability.length; j++) {
+            if (slots[i].ID == userAvaliability[j].time && userAvaliability[j].open) {
+                slots[i].paintColor(userAvaliability[j].open);
+            }
+        }
+
+    });*/
+}

@@ -49,6 +49,7 @@ namespace TAApplication.Data
         }
 
         public DbSet<Application> Applications { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
 
         /// <summary>
         /// Intializes all the seeding users in the database. 

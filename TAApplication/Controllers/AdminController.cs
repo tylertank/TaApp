@@ -65,9 +65,12 @@ namespace TAApplication.Controllers
             return View(await _context.Course.ToListAsync());
         }
 
-        public IActionResult GetEnrollmentData(DateTime start, DateTime end, string dept, string courseNum)
+        public async Task<IActionResult> GetEnrollmentData(DateTime start, DateTime end, string dept, int courseNum)
         {
-            return View();
+            var enrollments = _context.Enrollments.Where(e => e.enrolledTime.Date >= start.Date && e.enrolledTime.Date <= end.Date 
+                                                           && e.course.department == dept && e.course.courseNumber == courseNum);
+           
+            return View(enrollments.ToList());
         }
 
 
