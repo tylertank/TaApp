@@ -16,9 +16,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data;
 using TAApplication.Areas.Data;
+using TAApplication.Data;
 
 namespace TAApplication.Controllers
 {
@@ -29,14 +31,15 @@ namespace TAApplication.Controllers
     public class AdminController : Controller
     {
         private UserManager<TAUser> um;
-
+        private readonly ApplicationDbContext _context;
         /// <summary>
         /// Automatically bring in the user manager
         /// </summary>
         /// <param name="userManager"></param>
-        public AdminController(UserManager<TAUser> userManager)
+        public AdminController(UserManager<TAUser> userManager, ApplicationDbContext Context )
         {
             um = userManager; 
+            _context = Context;
         }
 
         /// <summary>
@@ -57,9 +60,9 @@ namespace TAApplication.Controllers
         }
 
 
-        public IActionResult EnrollmentTrends()
+        public async Task<IActionResult> EnrollmentTrends()
         {
-            return View();
+            return View(await _context.Course.ToListAsync());
         }
 
         public IActionResult GetEnrollmentData(DateTime start, DateTime end, string dept, string courseNum)

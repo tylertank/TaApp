@@ -5,11 +5,23 @@
 @using Microsoft.AspNetCore.Identity
 @using TAApplication.Areas.Data
 @inject UserManager<TAUser> um
+@model IEnumerable<TAApplication.Models.Course>
 @{
     ViewData["Title"] = "Enrollment Trends";
+
+    List<Course> allCourses = new List<Course>();
+    foreach(var course in Model){
+        allCourses.Add(course);
+    }
+        allCourses.OrderBy(c => c.department).ThenBy(c => c.courseNumber);
+
 }
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.3.2/highcharts.js" integrity="sha512-JVzXlL1mZb/G0YNUJtPqUzA/QtPMQLNpCtEBOV9R8P3Uskp4W0C+6SVZ3rpwnKcp/V/59YQoGNUYmB/N6do1sA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="~/js/Admin/Enrollment.js" asp-append-version="true"></script>
 } <figure class="highcharts-figure">
         <div id="EnrollmentChart"></div>
@@ -19,3 +31,28 @@
             enhanced readability.
         </p>
     </figure>
+     
+        <div class="text-danger"></div>
+        <div class="form-group">
+            <p>Start Date: <input type="text" id="startDate"></p>
+        </div>
+        <div class="form-group">
+            <p>End Date: <input type="text" id="endDate"></p>
+        </div>
+        <div class="form-group">
+            <label  class="control-label"></label>
+            <select  class="form-control" style="width:450px">
+                @{
+                foreach (var course in allCourses)
+                {
+                    <option value="@course.department @course.courseNumber">@course.department, @course.courseNumber</option>
+                }
+            }
+        </select>
+    </div>
+
+  
+</div>
+  
+
+    <button class="btn btn-warning" id="save">Save Note</button>
