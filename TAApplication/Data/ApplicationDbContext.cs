@@ -186,7 +186,53 @@ namespace TAApplication.Data
             await context.SaveChangesAsync();
 
         }
+        public async Task IntializeEnrollments(ApplicationDbContext context)
+        {
+            string[,] seedEnroll;
+            using (var reader = new StreamReader(@"wwwroot\uploads\temp.csv"))
+            {
+                    var line = reader.ReadLine();
+                    var headers = line.Split(',');
+                    seedEnroll = new string[headers.Length, 14];
+                for (int i = 0; i < seedEnroll.GetLength(0); i++)
+                {
+                    seedEnroll[i,0] = headers[i];
+                }
+                    int count = 1;
+                while (!reader.EndOfStream)
+                {
+                    
+                    line = reader.ReadLine();
+                    headers = line.Split(',');
+                    for(int i = 0; i < headers.Length; i++)
+                    {
+                        seedEnroll[i,count] = headers[i];
+                    }
+                    count++;
+                }
+            }
 
+            for(int i = 1; i < seedEnroll.GetLength(1); i++)
+            {
+                int space = seedEnroll[0, i].IndexOf(" ");
+
+                int courseNum=  int.Parse(seedEnroll[0, i].Substring(space, seedEnroll[0,i].Length-space));
+                string courseDep = seedEnroll[0, i].Substring(0, 2);
+                var courseList = context.Course.Where(o => o.courseNumber == courseNum && o.department == courseDep).ToArray();
+                for(int j = 1; j < seedEnroll.GetLength(0); j++)
+                {
+                    string dateStr = seedEnroll[j, 0] + ", 2022";
+                    var parsedDate = DateTime.Parse(dateStr);
+                    var c = courseList[0];
+                    int enrolled = int.Parse(seedEnroll[j, i]);
+                    context.Add(new Enrollment(c, parsedDate,enrolled ));
+                }
+            }
+            await context.SaveChangesAsync();
+  
+           
+
+            }
         public async Task IntializeCourses(UserManager<TAUser> um, ApplicationDbContext context)
         {
             var users = um.Users;
@@ -197,18 +243,43 @@ namespace TAApplication.Data
             var course3 = new Course();
             var course4 = new Course();
             var course5 = new Course();
+            var course6 = new Course();
+            var course7 = new Course();
+            var course8 = new Course();
+            var course9 = new Course();
+            var course10 = new Course();
+            var course11 = new Course();
+            var course12 = new Course();
+            var course13 = new Course();
 
             course1.semesterOffered = "Spring";
             course2.semesterOffered = "Spring";
             course3.semesterOffered = "Spring";
             course4.semesterOffered = "Spring";
             course5.semesterOffered = "Spring";
+            course6.semesterOffered = "Spring";
+            course7.semesterOffered = "Spring";
+            course8.semesterOffered = "Spring";
+            course9.semesterOffered = "Spring";
+            course10.semesterOffered = "Spring";
+            course11.semesterOffered = "Spring";
+            course12.semesterOffered = "Spring";
+            course13.semesterOffered = "Spring";
+
 
             course1.yearOffered = 2023;
             course2.yearOffered = 2023;
             course3.yearOffered = 2023;
             course4.yearOffered = 2023;
             course5.yearOffered = 2023;
+            course6.yearOffered = 2023;
+            course7.yearOffered = 2023;
+            course8.yearOffered = 2023;
+            course10.yearOffered = 2023;
+            course12.yearOffered = 2023;
+            course13.yearOffered = 2023;
+            course9.yearOffered = 2023;
+            course11.yearOffered = 2023;
 
             course1.title = "Intro Comp Programming";
             course1.department = "CS";
@@ -275,11 +346,55 @@ namespace TAApplication.Data
             course5.enrollment = 150;
             course5.Note = "Course needs 4 more TAs";
 
+            course6.title = "Object Programming";
+            course6.department = "CS";
+            course6.courseNumber = 1410;
+
+            course7.title = "Advanced Object Oriented Programming";
+            course7.department = "CS";
+            course7.courseNumber = 1420;
+
+            course8.title = "Computer";
+            course8.department = "CS";
+            course8.courseNumber = 3200;
+
+            course9.title = "Software Engineering 2";
+            course9.department = "CS";
+            course9.courseNumber = 3500;
+
+
+            course10.title = "Algorithms";
+            course10.department = "CS";
+            course10.courseNumber = 4150;
+
+            course11.title = "Computer Security";
+            course11.department = "CS";
+            course11.courseNumber = 4480;
+
+            course12.title = "Captsone Design";
+            course12.department = "CS";
+            course12.courseNumber = 4500;
+
+            course13.title = "Database Systems";
+            course13.department = "CS";
+            course13.courseNumber = 4530;
+
             context.Course.Add(course1);
             context.Course.Add(course2);
             context.Course.Add(course3);
             context.Course.Add(course4);
             context.Course.Add(course5);
+            context.Course.Add(course6);
+            context.Course.Add(course7);
+                
+            context.Course.Add(course8);
+            context.Course.Add(course9);
+            context.Course.Add(course10);
+            context.Course.Add(course11);
+            context.Course.Add(course12);
+            context.Course.Add(course13);
+
+ 
 
             await context.SaveChangesAsync();
         }

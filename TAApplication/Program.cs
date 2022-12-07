@@ -61,6 +61,7 @@ using (var scope = app.Services.CreateScope())
         await DB.IntializeApplication(um, context);
         await DB.IntializeCourses(um, context);
         await DB.IntializeSlots(um, context);
+        await DB.IntializeEnrollments(context);
     }
 }
 

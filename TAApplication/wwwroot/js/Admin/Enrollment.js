@@ -75,6 +75,8 @@ function getData() {
         .done(function (response) {
             $("#save").hide();
             console.log("Done");
+
+            
         }).catch(error => {
 
             window.location.reload();
