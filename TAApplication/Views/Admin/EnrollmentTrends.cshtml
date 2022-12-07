@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using Microsoft.AspNetCore.Identity
+@using TAApplication.Areas.Data
+@inject UserManager<TAUser> um
+@{
+    ViewData["Title"] = "Enrollment Trends";
+}
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.3.2/highcharts.js" integrity="sha512-JVzXlL1mZb/G0YNUJtPqUzA/QtPMQLNpCtEBOV9R8P3Uskp4W0C+6SVZ3rpwnKcp/V/59YQoGNUYmB/N6do1sA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/Admin/Enrollment.js" asp-append-version="true"></script>
+} <figure class="highcharts-figure">
+        <div id="EnrollmentChart"></div>
+        <p class="highcharts-description">
+            Basic line chart showing trends in a dataset. This chart includes the
+            <code>series-label</code> module, which adds a label to each line for
+            enhanced readability.
+        </p>
+    </figure>

@@ -56,6 +56,18 @@ namespace TAApplication.Controllers
             return View();
         }
 
+
+        public IActionResult EnrollmentTrends()
+        {
+            return View();
+        }
+
+        public IActionResult GetEnrollmentData(DateTime start, DateTime end, string dept, string courseNum)
+        {
+            return View();
+        }
+
+
         /// <summary>
         /// Takes in the users ID and toggles the role on or off A
         /// A user can only have one role at a time.
