@@ -1,27 +1,31 @@
 ```
 Author:     Cole Hanlon
 Partner:    Tyler Harkness
-Date:       23-Nov-2022
+Date:       12-9-2022
 Course:     CS 4540, University of Utah, School of Computing
 GitHub ID:  ColeHanlon, tylertank
 Repo:       https://github.com/uofu-cs4540-fall2022/taapplication-webmoguls
-Commit Tag: PS8
+Commit Tag: PS9
 Project:    TA Application
 Copyright:  CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
 ```
+# AWS Links 
+Cole - 
+Tyler - 
+
 # Overview of the TA Application Functionality 
 
-We have now added the functionality for users to view, and update their availability. We have implemented this in a very similar way as seen in the assignment details. One design choice we made is not adding the ability for dragging. We saw the issues that can arise in Lecture, such as having inconsistent selection, and causing troubles for the user. We do not expect a user to have too much availability, or have to update this often, therefore, just selecting each time slot is fine in our eyes. 
+We have now added the functionality for the admin to view data trends about course enrollments for specific time ranges. They are able to see the enrollments over time for one class at a time using the default trends page. Or see total enrollments for multiple classes as of the current day using the pie chart trends page. We both feel that we are finally getting the hang of javascript and felt pretty good at transferring data to and from the database, controller, and views. 
 
 # Comments to Evaluators:
 
-As of submitting this assignment we are not aware of any bugs. We have updated the grading links in the nav bar for this assignment as listed in the assignment details. We did layout our JavaScript a bit different than what is described in the assignment details. We followed the example website provided by the professor, and made many seperate JavaScript classes. We think this makes things more understandable, rather than the single class which does everything described in the assignment details. We use AvailabilityTracker.js to hold our setup function, which then constructs our individual components which are defined as their own JavaScript classes. 
+As of submitting this assignment we are not aware of any bugs. We have updated the grading links in the nav bar for this assignment as listed in the assignment details. We made a design choice to only allow 1 class at a time to be charted because we could not figure out how to fix and adjust the x-axis once a series had been already added. To fix this we remove the series from the chart each time a new data request is sent. If a user wants to see multiple enrollments they can use the piechart trends page to see multiple classes.
 
 # Assignment Specific Topics
 
 Above and Beyond
 
-We have mostly focused on a working solution, and have not done much beyond the assignment details. We decided to simplify access to this page, by only allowing Applicants to view it, and then showing the logged in user their availability. This limits the need for parameters withn the link, and you can easily navigate to the page. We have added a button within viewing your application to set your availability. We feel this is useful as when you complete the application, you will see this button and can complete this step.
+We added a second page to hold the enrollment pie chart trends for one of the above and beyond requirements. For the second requirment we deployed our system to AWS.
 
 # Consulted Peers:
 
@@ -45,8 +49,8 @@ common liscensing when possible.
 
 # References:
     
-    1. Pixi Graphics Docs - https://pixijs.download/dev/docs/PIXI.Graphics.html
-    2. Pixi Lines - https://www.html5gamedevs.com/topic/28098-simple-lines-with-pixijs/
+    1. Removing a series from highchart - https://stackoverflow.com/questions/21979476/remove-series-by-name-or-id-in-highcharts
+    2. Setting the X-Axis with dates - https://www.geeksforgeeks.org/how-to-get-highcharts-dates-in-the-x-axis/
 
 # Time Expenditures:
 
@@ -56,6 +60,8 @@ common liscensing when possible.
     5. Assignment Five: Predicted Hours: 10 Actual Hours: 10
     6. Assignment Six: Predicted Hours: 6 Actual Hours: 5
     8. Assignment Eight: Predicted Hours: 10 Actual Hours: 10
+    9. Assignment Nine: Predicted Hours: 8 Actual Hours: 6
+
 
     
     
