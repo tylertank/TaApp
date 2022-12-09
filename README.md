@@ -10,7 +10,9 @@ Project:    TA Application
 Copyright:  CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
 ```
 # AWS Links 
-Cole -                                                                                                                                                                  Tyler - https://ec2-34-228-152-202.compute-1.amazonaws.com/
+Cole -  https://3.211.128.95.nip.io/
+
+Tyler - https://ec2-34-228-152-202.compute-1.amazonaws.com/
 
 # Overview of the TA Application Functionality 
 
