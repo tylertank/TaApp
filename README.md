@@ -16,7 +16,7 @@ Tyler - https://ec2-34-228-152-202.compute-1.amazonaws.com/
 
 # Overview of the TA Application Functionality 
 
-We have now added the functionality for the admin to view data trends about course enrollments for specific time ranges. They are able to see the enrollments over time for one class at a time using the default trends page. Or see total enrollments for multiple classes as of the current day using the pie chart trends page. We both feel that we are finally getting the hang of javascript and felt pretty good at transferring data to and from the database, controller, and views. 
+We have now added the functionality for the admin to view data trends about course enrollments for specific time ranges. They are able to see the enrollments over time for different classes at a single time using the default trends page. Or see total enrollments for multiple classes as of the current day using the pie chart trends page. We both feel that we are finally getting the hang of javascript and felt pretty good at transferring data to and from the database, controller, and views. 
 
 # Comments to Evaluators:
 
