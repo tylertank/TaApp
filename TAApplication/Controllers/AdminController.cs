@@ -1,7 +1,7 @@
 ﻿/**
  * Author:    Cole Hanlon
  * Partner:   Tyler Harkness
- * Date:      9/27/2022
+ * Date:      12/8/2022
  * Course:    CS 4540, University of Utah, School of Computing
  * Copyright: CS 4540 and Cole Hanlon, Tyler Harkness - This work may not be copied for use in Academic Coursework.
  *
@@ -10,7 +10,9 @@
  *
  * File Contents
  *
- *   This AdminController.cs file contains all contents to change the roles for a given user, and render the admin roles page.
+ *   This AdminController.cs file contains all contents to change the roles for a given user, and render the admin roles page. 
+ *   
+ *   Updated with endpoints and new views to support highchart functionality
  */
 
 using Microsoft.AspNetCore.Authorization;
@@ -59,12 +61,34 @@ namespace TAApplication.Controllers
             return View();
         }
 
-
+        /// <summary>
+        /// Returns view of line chart enrollments over time, no data
+        /// populated yet
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> EnrollmentTrends()
         {
             return View(await _context.Course.ToListAsync());
         }
 
+        /// <summary>
+        /// Returns the pie chart view with no data yet
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> EnrollmentTrendsPie()
+        {
+            return View(await _context.Course.ToListAsync());
+        }
+
+        /// <summary>
+        /// Returns JSON of Enrollment objects each day between the start and end range from
+        /// the database
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="dept"></param>
+        /// <param name="courseNum"></param>
+        /// <returns></returns>
         public async Task<IActionResult> GetEnrollmentData(DateTime start, DateTime end, string dept, int courseNum)
         {
             var enrollments = _context.Enrollments.Where(e => e.enrolledTime.Date >= start.Date && e.enrolledTime.Date <= end.Date 
@@ -73,6 +97,21 @@ namespace TAApplication.Controllers
             return Ok(enrollments.ToList());
         }
 
+        /// <summary>
+        /// Returns the most recent count of enrollment from the defined course before or equal to today's
+        /// date
+        /// </summary>
+        /// <param name="today"></param>
+        /// <param name="dept"></param>
+        /// <param name="courseNum"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> GetEnrollmentDataPie(DateTime today, string dept, int courseNum)
+        {
+            var enrollments = _context.Enrollments.Where(e => e.enrolledTime.Date <= today.Date
+                                                           && e.course.department == dept && e.course.courseNumber == courseNum).OrderByDescending(e => e.enrolledTime).Take(1);
+
+            return Ok(enrollments.ToList());
+        }
 
         /// <summary>
         /// Takes in the users ID and toggles the role on or off A

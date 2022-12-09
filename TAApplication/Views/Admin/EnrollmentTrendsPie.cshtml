@@ -10,10 +10,9 @@
 
   File Contents
 
-     This EnrollmentTrends.cshtml file contains all contents for a bootstrap page which holds input fields and connection
-     to the database to draw a line chart of enrollments over time.
+     This EnrollmentTrendsPie.cshtml file contains all contents for a bootstrap page which holds input fields and connection
+     to the database to draw a pie chart of most recent enrollment counts from today.
 -->
-
 @using Microsoft.AspNetCore.Identity
 @using TAApplication.Areas.Data
 @inject UserManager<TAUser> um
@@ -22,28 +21,28 @@
     ViewData["Title"] = "Enrollment Trends";
 
     List<Course> allCourses = new List<Course>();
-    foreach(var course in Model){
+    foreach (var course in Model)
+    {
         allCourses.Add(course);
     }
-        allCourses.OrderBy(c => c.department).ThenBy(c => c.courseNumber);
+    allCourses.OrderBy(c => c.department).ThenBy(c => c.courseNumber);
 }
 @section Scripts{
-    
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.3.2/highcharts.js" integrity="sha512-JVzXlL1mZb/G0YNUJtPqUzA/QtPMQLNpCtEBOV9R8P3Uskp4W0C+6SVZ3rpwnKcp/V/59YQoGNUYmB/N6do1sA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="~/js/Admin/Enrollment.js" asp-append-version="true"></script>
+    <script src="~/js/Admin/EnrollmentPie.js" asp-append-version="true"></script>
 }
-     
-<h1>Enrollment Over Time Data</h1>
-<p>Start Date: <input type="text" id="startDate" value="11/15/2022"></p>
-<p>End Date: <input type="text" id="endDate" value="@DateTime.Now.ToString("MM/dd/yyyy")"></p>
-    
-<div class="form-group">
-        <label  class="control-label">Course</label>
-        <select  class="form-control" style="width:250px" id="course">
+
+    <h1>Enrollment Counts Today</h1>
+    <p>Enrollments as of Today: <input type="text" id="endDate" disabled=True value="@DateTime.Now.ToString("MM/dd/yyyy")"></p>
+
+    <div class="form-group">
+        <label class="control-label">Course</label>
+        <select class="form-control" style="width:250px" id="course">
             @{
             foreach (var course in allCourses)
             {
@@ -57,9 +56,9 @@
 <div class="spinner-border text-dark" id="spinner" role="status">
 </div>
 <hr>
-    <figure class="highcharts-figure">
-        <div id="EnrollmentChart"></div>
-        <p class="highcharts-description">
-            Line chart displaying enrollments over time
-        </p>
-    </figure>
+<figure class="highcharts-figure">
+    <div id="EnrollmentPie"></div>
+    <p class="highcharts-description">
+        Pie chart displaying total enrollment count in course as of today
+    </p>
+</figure>
