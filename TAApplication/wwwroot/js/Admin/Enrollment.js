@@ -12,6 +12,14 @@
     },
 
     xAxis: {
+
+        type: "datetime",
+        labels: {
+            formatter: function () {
+                return Highcharts.dateFormat('%m-%d-%Y', this.value);
+            }
+        },
+        
         accessibility: {
             rangeDescription: 'Jan to Dec'
         }
@@ -31,11 +39,6 @@
             pointStart: 0
         }
     },
-
-    series: [{
-        name: '',
-        data: []
-    }],
 
     responsive: {
         rules: [{
@@ -73,12 +76,18 @@ function getData() {
             data: { start: startDate, end: endDate, dept: courseInfo[0], courseNum: courseInfo[1] }
         })
         .done(function (response) {
-            $("#save").hide();
-            console.log("Done");
-
+            const dataarr = Array(response.length);
+            for (let i = 0; i < response.length; i++){
+                var datevar = new Date(response[i].enrolledTime)
+                const subarr = [datevar, response[i].enrollment];
+                dataarr[i] = subarr;
+            }
+            $("#EnrollmentChart").highcharts().addSeries({
+                name: course,
+                data: dataarr
+            });
             
         }).catch(error => {
-
             window.location.reload();
             console.log("Error");
         }).always(function () {
