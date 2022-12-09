@@ -19,13 +19,13 @@ We have now added the functionality for the admin to view data trends about cour
 
 # Comments to Evaluators:
 
-As of submitting this assignment we are not aware of any bugs. We have updated the grading links in the nav bar for this assignment as listed in the assignment details. We made a design choice to only allow 1 class at a time to be charted because we could not figure out how to fix and adjust the x-axis once a series had been already added. To fix this we remove the series from the chart each time a new data request is sent. If a user wants to see multiple enrollments they can use the piechart trends page to see multiple classes.
+As of submitting this assignment we are not aware of any bugs. We have updated the grading links in the nav bar for this assignment as listed in the assignment details. We have implemented the line chart in a way where multiple lines can be added, and you can add the same course multiple times. We do not remove any series, as we want the admin to build up a graph, using the dates and courses they want. This can build a graph with many lines, with differing starts and end dates. Please observe our extra pie chart page through the TA links.
 
 # Assignment Specific Topics
 
 Above and Beyond
 
-We added a second page to hold the enrollment pie chart trends for one of the above and beyond requirements. For the second requirment we deployed our system to AWS.
+We added a second page to hold the enrollment pie chart trends for one of the above and beyond requirements. The pie chart shows the most recent enrollment value from today, and you can add multiple courses to compare their current enrollments. For the second requirment we deployed our system to AWS.
 
 # Consulted Peers:
 
